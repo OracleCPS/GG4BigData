@@ -1,17 +1,13 @@
 # GG4BigData
-# Data Integration Platform Cloud Workshop
+
 
 ## How to Prepare for This Workshop 
-
-- To log issues and view the lab guide source, go to the [github oracle](https://github.com/OracleCPS/DIPC) repository.
-
-- The Labguides are best viewed using the workshop's [GitHub Pages Website URL](https://oraclecps.github.io/DIPC/) 
 
 - Once you are viewing the workshop's gitHub page's website, you can see a list of Lab Guides at any time by clicking on the **Menu Icon**
 
 ## Oracle Data Integration Platform Cloud (DIPC) Services Workshop
 
-Welcome to the Oracle Data Integration Platform Cloud Service Workshop. The content will give you a basic understanding of Oracle Data Integration Platform Cloud Service and many of the capabilities related to provisioning, elevated tasks, agent install, data preparation and internals.  The labs are as follows:
+Welcome to the Golden Gate for Big Data Workshop. The content will give you a basic understanding of Golden Gate and Big Data Cloud Service and many of the capabilities related to provisioning, data preparation and internals.  The labs are as follows:
 -  Lab 100 - Provisioning Golden Gate for Big Data
 -  Lab 200 - Provisioning and accessing BigData
 -  Lab 300 - Using BigData Components (Hadoop, Hive, Pig, Spark, Oracle R)
