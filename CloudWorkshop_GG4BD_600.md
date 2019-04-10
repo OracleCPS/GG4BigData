@@ -16,4 +16,4 @@ Approximately 30 minutes
 ### What Do You Need?
 Your will need:
 - Oracle Cloud URL
-- Oracle Cloud User and Password
+- Oracle Cloud User and Password 
