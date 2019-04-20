@@ -26,62 +26,62 @@
             {
                 "number": "100",
                 "filename": "CloudWorkshop_GG4BD_100.md",
-                "title": "Lab 100:  ",
+                "title": "Lab 100: Provision Golden Gate for Big Data",
                 "description": "Steps ",
                 "labels": {"version": "Instructor Led"}
             },
             {
                 "number": "200",
                 "filename": "CloudWorkshop_GG4BD_200.md",
-                "title": "Lab 200: ",
+                "title": "Lab 200: Provision and Access Big Data",
                 "description": "steps",
                 "labels": {"version": "Instructor Led"}
             },
             {
                 "number": "300",
                 "filename": "CloudWorkshop_GG4BD_300.md",
-                "title": "Lab 300: ",
+                "title": "Lab 300: Using BigData Components",
                 "description": "lab",
                 "labels": {"version": "Instructor Led"}
             },
             {
                 "number": "400",
                 "filename": "CloudWorkshop_GG4BD_400.md",
-                "title": "Lab 400: ",
+                "title": "Lab 400: MySQL to MySQL",
                 "description": "lab 400",
                 "labels": {"version": "Instructor Led"}
             },
             {
                 "number": "500",
                 "filename": "CloudWorkshop_GG4BD_500.md",
-                "title": "Lab 500: ",
+                "title": "Lab 500: MySQL to File Writer Handler",
                 "description": "lab",
                 "labels": {"version": "Instructor Led"}
             },
             {
                 "number": "600",
                 "filename": "CloudWorkshop_GG4BD_600.md",
-                "title": "Lab 600: ",
+                "title": "Lab 600: MySQL to HDFS",
                 "description": "lab",
                 "labels": {"version": "Instructor Led"}
             },
             {
                 "number": "700",
                 "filename": "CloudWorkshop_GG4BD_700.md",
-                "title": "Lab 700: ",
+                "title": "Lab 700: MySQL to Hive",
                 "description": "lab",
                 "labels": {"version": "Instructor Led"}
             },
             {
                 "number": "800",
                 "filename": "CloudWorkshop_GG4BD_800.md",
-                "title": "Lab 800: ",
+                "title": "Lab 800: MySQL to Hbase",
                 "description": "lab",
                 "labels": {"version": "Instructor Led"}
             },
             {
                 "number": "900",
-                "filename": "CloudWorkshop_GG4BD_800.md",
+                "filename": "CloudWorkshop_GG4BD_900.md",
                 "title": "Lab 900: ",
                 "description": "lab",
                 "labels": {"version": "Instructor Led"}
