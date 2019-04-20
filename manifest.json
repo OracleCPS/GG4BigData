@@ -1,0 +1,156 @@
+{
+    "workshop": {
+        "title": "GoldenGate For BigData Workshop",
+        "description": "These labs will give you a basic understanding of the Oracle Data Integration Cloud Service and many of the capabilities around administration and database development.  The labs will walk you through creating and accessing a new Database Cloud Service instance.  You will explore some common use cases for moving your data from on-premises to the cloud.  Next, you will use the Oracle Database Cloud Backup Module and RMAN to backup your on-premise data to the Oracle Public Cloud and then recover lost data.  Lastly, you will deploy an APEX application and adjust the firewall rules to support access to the application from the Internet using your browser, smart phone or tablet.",
+        "interactive":"https://launch.oracle.com/?dbcs",
+        "versions": [
+          {
+            "name": "Instructor Led",
+            "description": "An in-person workshop with an Oracle instructor",
+            "imageUrl": "https://oracle.github.io/learning-library/workshops/common-content/images/common/Instructor Led.png"
+          },
+          {
+            "name": "Self-Guided",
+            "description": "Individual self-guided learning",
+            "imageUrl": "https://oracle.github.io/learning-library/workshops/common-content/images/common/Self-Service.png"
+          }
+        ],
+        "labs": [
+            {
+                "number": "0",
+                "filename": "README.md",
+                "title": "README First",
+                "description": "Step-by-step workshop instructions",
+                "labels": {"version": "Instructor Led"}
+            },
+            {
+                "number": "100",
+                "filename": "CloudWorkshop_GG4BD_100.md",
+                "title": "Lab 100:  ",
+                "description": "Steps ",
+                "labels": {"version": "Instructor Led"}
+            },
+            {
+                "number": "200",
+                "filename": "CloudWorkshop_GG4BD_200.md",
+                "title": "Lab 200: ",
+                "description": "steps",
+                "labels": {"version": "Instructor Led"}
+            },
+            {
+                "number": "300",
+                "filename": "CloudWorkshop_GG4BD_300.md",
+                "title": "Lab 300: ",
+                "description": "lab",
+                "labels": {"version": "Instructor Led"}
+            },
+            {
+                "number": "400",
+                "filename": "CloudWorkshop_GG4BD_400.md",
+                "title": "Lab 400: ",
+                "description": "lab 400",
+                "labels": {"version": "Instructor Led"}
+            },
+            {
+                "number": "500",
+                "filename": "CloudWorkshop_GG4BD_500.md",
+                "title": "Lab 500: ",
+                "description": "lab",
+                "labels": {"version": "Instructor Led"}
+            },
+            {
+                "number": "600",
+                "filename": "CloudWorkshop_GG4BD_600.md",
+                "title": "Lab 600: ",
+                "description": "lab",
+                "labels": {"version": "Instructor Led"}
+            },
+            {
+                "number": "700",
+                "filename": "CloudWorkshop_GG4BD_700.md",
+                "title": "Lab 700: ",
+                "description": "lab",
+                "labels": {"version": "Instructor Led"}
+            },
+            {
+                "number": "800",
+                "filename": "CloudWorkshop_GG4BD_800.md",
+                "title": "Lab 800: ",
+                "description": "lab",
+                "labels": {"version": "Instructor Led"}
+            },
+            {
+                "number": "900",
+                "filename": "CloudWorkshop_GG4BD_800.md",
+                "title": "Lab 900: ",
+                "description": "lab",
+                "labels": {"version": "Instructor Led"}
+            },
+            {
+                "number": "1000",
+                "filename": "CloudWorkshop_GG4BD_1000.md",
+                "title": "Lab 1000: ",
+                "description": "lab",
+                "labels": {"version": "Instructor Led"}
+            },
+            {
+                "number": "1100",
+                "filename": "CloudWorkshop_GG4BD_1100.md",
+                "title": "Lab 1100: ",
+                "description": "lab",
+                "labels": {"version": "Instructor Led"}
+            },
+            {
+                "number": "1200",
+                "filename": "CloudWorkshop_GG4BD_1200.md",
+                "title": "Lab 1200: ",
+                "description": "lab",
+                "labels": {"version": "Instructor Led"}
+            },
+            {
+                "number": "1300",
+                "filename": "CloudWorkshop_GG4BD_1300.md",
+                "title": "Lab 1300: ",
+                "description": "lab",
+                "labels": {"version": "Instructor Led"}
+            },
+            {
+                "number": "1400",
+                "filename": "CloudWorkshop_GG4BD_1400.md",
+                "title": "lab 1400",
+                "description": "lab",
+                "labels": {"version": "Instructor Led"}
+            },
+            {
+                "number": "1500",
+                "filename": "CloudWorkshop_GG4BD_1500.md",
+                "title": "Lab 1500",
+                "description": "lab",
+                "labels": {"version": "Instructor Led"}
+            },
+           
+            {
+                "number": "0",
+                "filename": "README.md",
+                "title": "README First",
+                "description": "Step-by-step workshop instructions",
+                "labels": {"version": "Self-Guided"}
+            },
+            {
+                "number": "10",
+                "filename": "Setup.md",
+                "title": "Setup Steps for Self Guided Labs",
+                "description": "Step-by-step setup instructions",
+                "labels": {"version": "Self-Guided"}
+            },
+            {
+                "number": "100",
+                "filename": "CloudWorkshop_GG4BD_100.md",
+                "title": "Lab 100: ",
+                "description": "Steps ",
+                "labels": {"version": "Self-Guided"}
+            }
+        
+        ]
+    }
+}
