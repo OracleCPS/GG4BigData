@@ -39,7 +39,11 @@ In this step you will use putty client to connect to Oracle Cloud Compte environ
 
 1. Create a Directory to install the Goldengate for bigdata. Here we have created /u01/app/ggbd_home1
 
-![](images/100/image100_4.png)
+```
+[opc@compute-dipc02 ~]$ sudo su - oracle
+Last login: Fri Apr 26 09:32:22 GMT 2019 on pts/2
+[oracle@compute-dipc02 ~]$ mkdir /u01/app/ggbd_home1
+```
 
 2. Sudo into the oracle user and Verify the environment variables as java jdk would be already installed and environment variables should be set already. Below are the sample environment variables.
 
@@ -63,5 +67,13 @@ total 92984
 
 ```
 
+4. Copy this Goldengate for Bigdata software into the directory you created in step 1 for installation.
 
+```
+[oracle@compute-dipc02 ~]$ cd ~/Downloads/
+[oracle@compute-dipc02 Downloads]$ ls -lrt
+total 92984
+-rwxr-xr-x. 1 oracle oracle 95212174 Apr 24 11:42 OGG_BigData_Linux_x64_12.3.2.1.1.zip
+[oracle@compute-dipc02 Downloads]$ cp OGG_BigData_Linux_x64_12.3.2.1.1.zip /u01/app/ggbd_home1/
+```
 
