@@ -1,6 +1,6 @@
 # Lab 100 -  Installation of Golden Gate for Big Data
 
-![](images/100/image100_5.png)
+![](images/100/image100_0.png)
 
 ## Before You Begin
 
@@ -77,3 +77,8 @@ total 92984
 [oracle@compute-dipc02 Downloads]$ cp OGG_BigData_Linux_x64_12.3.2.1.1.zip /u01/app/ggbd_home1/
 ```
 
+### STEP 3: Install Goldengate For Bigdata and start the manager process
+
+1. Now got the the directory where you copied the software file and unzip the Goldengate for Bigdata
+
+![](images/100/image100_4.png)
