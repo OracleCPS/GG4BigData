@@ -1,5 +1,5 @@
 # Lab 400 -  MySQL to MySQL
-![](images/100/image100_0.png)
+![](images/100/image400_0.png)
 
 
 ## Before You Begin
