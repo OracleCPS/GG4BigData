@@ -93,5 +93,11 @@ total 92984
 
 4. Now we need to give a port to Goldengate manager process and start it. use edir param mgr and add a port as show in the below picture and start the manager process.
 
+```
+PORT 7100
+ACCESSRULE, PROG *, IPADDR *, ALLOW
+```
 ![](images/100/image100_7.png)
 
+
+You have completed lab 100! Great Job!
