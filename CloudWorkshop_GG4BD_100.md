@@ -1,4 +1,4 @@
-![](images/100/image100_0.png)
+![](images/100/image100_0.PNG)
 
 # Lab 100 -  Provision Golden Gate for Big Data
 
