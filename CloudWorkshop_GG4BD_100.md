@@ -82,3 +82,16 @@ total 92984
 1. Now got the the directory where you copied the software file and unzip the Goldengate for Bigdata
 
 ![](images/100/image100_4.png)
+
+2. Once you Unzip the file , you will get a tar file. Untar the file OGG_BigData_Linux_x64_12.3.2.1.1.tar
+
+![](images/100/image100_5.png)
+
+3. After this Log into GG Commandline interface with ./ggsci. And use the command create subdirs 
+
+![](images/100/image100_6.png)
+
+4. Now we need to give a port to Goldengate manager process and start it. use edir param mgr and add a port as show in the below picture and start the manager process.
+
+![](images/100/image100_7.png)
+
