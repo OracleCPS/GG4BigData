@@ -40,41 +40,40 @@ In this step you will use putty client to connect to Oracle Cloud Compte environ
 1. Create a Directory to install the Goldengate for bigdata. Here we have created /u01/app/ggbd_home1
 
 ```
-[opc@compute-dipc02 ~]$ sudo su - oracle
-Last login: Fri Apr 26 09:32:22 GMT 2019 on pts/2
-[oracle@compute-dipc02 ~]$ mkdir /u01/app/ggbd_home1
+[opc@gg4bd-target01 ~]$ sudo su - oracle
+Last login: Fri May  3 09:30:10 GMT 2019 on pts/0
+[oracle@gg4bd-target01 ~]$ mkdir /u01/app/ggbd_home1
 ```
 
 2. Sudo into the oracle user and Verify the environment variables as java jdk would be already installed and environment variables should be set already. Below are the sample environment variables.
 
 ```
 export GGBD_HOME=/u01/app/ggbd_home1
-export JAVA_HOME=/usr/java/jdk1.8.0_201-amd64
-export JRE_HOME=/usr/java/jdk1.8.0_201-amd64/jre
-export PATH=/usr/sbin:$ORACLE_HOME/bin:$JAVA_HOME/bin:$PATH
-export LD_LIBRARY_PATH=$JAVA_HOME/jre/lib/amd64/server:$JAVA_HOME/lib:$ORACLE_HOME/lib
+export JAVA_HOME=/u01/app/jdk1.8.0_211
+export JRE_HOME=/u01/app/jdk1.8.0_211/jre
+export PATH=/usr/sbin:${JAVA_HOME}/bin:${JRE_HOME}/bin:${PATH}:.
+export LD_LIBRARY_PATH=$JAVA_HOME/jre/lib/amd64/server:$JAVA_HOME/lib
 export CLASSPATH=$JAVA_HOME/lib:/u01/app/ggbd_home1/ggjava
 ```
 
 3. From the terminal screen change to the Downloads directory and You will fine the Goldengate for bigdata software there.
 
 ```
-[oracle@compute-dipc02 ~]$ cd ~/Downloads/
-[oracle@compute-dipc02 Downloads]$ ls -lrt
-total 92984
--rwxr-xr-x. 1 oracle oracle 95212174 Apr 24 11:42 OGG_BigData_Linux_x64_12.3.2.1.1.zip
-[oracle@compute-dipc02 Downloads]$
-
+[oracle@gg4bd-target01 ~]$ cd ~/Downloads/
+[oracle@gg4bd-target01 Downloads]$ ls -lrt
+total 731840
+-rwxr-xr-x. 1 oracle oracle  95212174 May  3 09:28 OGG_BigData_Linux_x64_12.3.2.1.1.zip
+[oracle@gg4bd-target01 Downloads]$
 ```
 
 4. Copy this Goldengate for Bigdata software into the directory you created in step 1 for installation.
 
 ```
-[oracle@compute-dipc02 ~]$ cd ~/Downloads/
-[oracle@compute-dipc02 Downloads]$ ls -lrt
+[oracle@gg4bd-target01 Downloads]$ cd ~/Downloads/
+[oracle@gg4bd-target01 Downloads]$ ls -lrt
 total 92984
--rwxr-xr-x. 1 oracle oracle 95212174 Apr 24 11:42 OGG_BigData_Linux_x64_12.3.2.1.1.zip
-[oracle@compute-dipc02 Downloads]$ cp OGG_BigData_Linux_x64_12.3.2.1.1.zip /u01/app/ggbd_home1/
+-rwxr-xr-x. 1 oracle oracle  95212174 May  3 09:28 OGG_BigData_Linux_x64_12.3.2.1.1.zip
+[oracle@gg4bd-target01 Downloads]$ cp OGG_BigData_Linux_x64_12.3.2.1.1.zip /u01/app/ggbd_home1/
 ```
 
 ### STEP 3: Install Goldengate For Bigdata and start the manager process
