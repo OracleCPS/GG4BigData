@@ -61,7 +61,75 @@ total 8
 [oracle@gg4bd-target01 .oci]$
 ```
 
+4. We need to unzip and keep the OCI java sdk file in a location which are needed for replicat to connect. You can download it from
+
+```  
+    https://docs.cloud.oracle.com/iaas/Content/API/SDKDocs/javasdk.htm
+```
+In our environment we have it downloaded in /home/oracle/Downloads. So Will create a directory for jars and copy the file into that directory.
+
+```
+[oracle@gg4bd-target01 ggbd_home1]$ mkdir -p /u01/app/jars/oci_libs
+[oracle@gg4bd-target01 ggbd_home1]$ cp /home/oracle/Downloads/oci-java-sdk.zip /u01/app/jars/oci_libs/
+```
+
+Now unzip the file in the location.
+
+```
+[oracle@gg4bd-target01 ggbd_home1]$ cd /u01/app/jars/oci_libs/
+[oracle@gg4bd-target01 ggbd_home1]$ unzip oci-java-sdk.zip
+[oracle@gg4bd-target01 oci_libs]$ ls -lrt
+total 113044
+-rw-r--r--. 1 oracle oracle     13144 Apr 15 20:56 LICENSE.txt
+drwxr-xr-x. 2 oracle oracle      4096 Apr 15 20:56 examples
+-rw-r--r--. 1 oracle oracle     26068 Apr 15 20:56 CHANGELOG.md
+drwxr-xr-x. 3 oracle oracle      4096 Apr 15 21:17 apidocs
+drwxr-xr-x. 3 oracle oracle      4096 Apr 15 21:18 third-party
+drwxr-xr-x. 2 oracle oracle      4096 Apr 15 21:18 lib
+drwxr-xr-x. 4 oracle oracle      4096 Apr 15 21:19 shaded
+drwxr-xr-x. 4 oracle oracle      4096 Apr 15 21:20 addons
+-rwxr-xr-x. 1 oracle oracle 115685847 May  6 10:12 oci-java-sdk.zip
+```
 
 
+### STEP 2: Goldengate Replicat Setup for delimitedtext format in OCI Obejct Storage.
+
+1. We already have a trail file created in the GGBD home. We will be using the same trail file to replicate to OCI Object Storage.
+
+![](images/500/image100_1.png)
 
 
+2. Add the replicat with the below commands.
+
+```
+GGSCI (gg4bd-target01) 4> add replicat RFWDSV, exttrail ./dirdat/eb
+REPLICAT added.
+
+GGSCI (gg4bd-target01) 5> edit param RFWDSV
+```
+
+Add the below parameters in the parameter file :
+```
+REPLICAT RFWDSV
+-----------------------------------------------------------------------------------------
+-- Trail file for this example is located in "AdapterExamples/trail" directory
+-- Command to add REPLICAT
+-- add replicat RFWDSV, exttrail ./dirdat/eb
+-- SETENV(GGS_JAVAUSEREXIT_CONF = 'dirprm/fw.props')
+-----------------------------------------------------------------------------------------
+CHECKPARAMS
+TARGETDB LIBFILE libggjava.so SET property=dirprm/rfwdsv.props
+REPORTCOUNT EVERY 1 MINUTES, RATE
+GROUPTRANSOPS 1000
+MAP employees.*, TARGET employees.*;
+```
+
+3. Now edit the dirprm/rfwdsv.props file with the below parameters. You can use sample property files found in $GGBD_HOME/AdapterExamples/big-data/filewriter .
+
+```
+GGSCI (gg4bd-target01) 8> exit
+[oracle@gg4bd-target01 ggbd_home1]$ cd dirprm
+[oracle@gg4bd-target01 dirprm]$ vi rfwdsv.props
+```
+
+Below are the parametrs we will be using.
