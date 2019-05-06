@@ -175,3 +175,58 @@ javawriter.bootoptions=-Xmx512m -Xms32m -Djava.class.path=.:ggjava/ggjava.jar:./
 5. You will be able to see the files created in OCI object storage.
 
 ![](images/500/image100_3.png)
+
+### STEP 3: Goldengate Replicat Setup for parquet format in OCI Obejct Storage.
+
+1. For parquet format we need parquet jars. We have the parquet jars downloaded in /home/oracle/Downloads. copy these jars in a directory and unzip them
+
+```
+[oracle@gg4bd-target01 jars]$ pwd
+/u01/app/jars
+[oracle@gg4bd-target01 jars]$ mkdir parquet_libs
+[oracle@gg4bd-target01 jars]$ ls -lrt
+total 8
+drwxrwxr-x. 3 oracle oracle 4096 May  6 14:45 oci_libs
+drwxrwxr-x. 2 oracle oracle 4096 May  6 15:36 parquet_libs
+```
+
+```
+[oracle@gg4bd-target01 jars]$ cd parquet_libs
+[oracle@gg4bd-target01 jars]$ cp /home/oracle/Downloads/parquet-hadoop-2.5.zip /u01/app/jars/parquet_libs/
+[oracle@gg4bd-target01 jars]$ cp /home/oracle/Downloads/parquet_libs.zip /u01/app/jars/parquet_libs/
+
+[oracle@gg4bd-target01 parquet_libs]$ ls -lrt
+total 57440
+-rwxr-xr-x. 1 oracle oracle 36967765 May  6 15:38 parquet-hadoop-2.5.zip
+-rwxr-xr-x. 1 oracle oracle 21847689 May  6 15:38 parquet_libs.zip
+
+[oracle@gg4bd-target01 parquet_libs]$ unzip parquet_libs.zip
+[oracle@gg4bd-target01 parquet_libs]$ unzip parquet-hadoop-2.5.zip
+```
+
+2. Add the replicat with the below command
+
+```
+GGSCI (gg4bd-target01) 49> add replicat rfwprq, exttrail ./dirdat/eb
+REPLICAT added.
+
+GGSCI (gg4bd-target01) 50> edit param rfwprq
+```
+
+Add the below parameters in the parameter file :
+
+```
+REPLICAT RFWPRQ
+-----------------------------------------------------------------------------------------
+-- Trail file for this example is located in "AdapterExamples/trail" directory
+-- Command to add REPLICAT
+-- add replicat RFWPRQ, exttrail ./dirdat/eb
+-- SETENV(GGS_JAVAUSEREXIT_CONF = 'dirprm/fw.props')
+-----------------------------------------------------------------------------------------
+TARGETDB LIBFILE libggjava.so SET property=dirprm/rfwprq.props
+REPORTCOUNT EVERY 1 MINUTES, RATE
+GROUPTRANSOPS 1000
+MAP employees.*, TARGET employees.*;
+```
+3. Now edit the dirprm/rfwprq.props file with the below parameters. You can use sample property files found in $GGBD_HOME/AdapterExamples/big-data/filewriter .
+
