@@ -230,3 +230,74 @@ MAP employees.*, TARGET employees.*;
 ```
 3. Now edit the dirprm/rfwprq.props file with the below parameters. You can use sample property files found in $GGBD_HOME/AdapterExamples/big-data/filewriter .
 
+```
+GGSCI (gg4bd-target01) 1> exit
+[oracle@gg4bd-target01 ggbd_home1]$ cd dirprm
+[oracle@gg4bd-target01 dirprm]$ vi rfwprq.props
+```
+Below are the parametrs we will be using.
+
+```
+gg.handlerlist=filewriter
+
+#The File Writer Handler
+gg.handler.filewriter.type=filewriter
+gg.handler.filewriter.mode=op
+gg.handler.filewriter.pathMappingTemplate=./dirout
+gg.handler.filewriter.stateFileDirectory=./dirsta
+gg.handler.filewriter.fileNameMappingTemplate=${fullyQualifiedTableName}_${currentTimestamp}.txt
+gg.handler.filewriter.fileRollInterval=7m
+gg.handler.filewriter.finalizeAction=delete
+gg.handler.filewriter.inactivityRollInterval=7m
+gg.handler.filewriter.format=avro_row_ocf
+gg.handler.filewriter.format.pkUpdateHandling=update
+gg.handler.filewriter.includetokens=true
+gg.handler.filewriter.partitionByTable=true
+#Selecting the Parquet Event Handler
+gg.handler.filewriter.eventHandler=parquet
+gg.handler.filewriter.rollOnShutdown=true
+
+#The Parquet Event Handler
+gg.eventhandler.parquet.type=parquet
+gg.eventhandler.parquet.pathMappingTemplate=./dirparquet
+gg.eventhandler.parquet.writeToHDFS=false
+gg.eventhandler.parquet.finalizeAction=delete
+#Selecting the S3 Event Handler
+gg.eventhandler.parquet.eventHandler=oci
+gg.eventhandler.parquet.fileNameMappingTemplate=${tableName}_${currentTimestamp}.parquet
+
+#The OCI Event handler
+gg.eventhandler.oci.type=oci
+gg.eventhandler.oci.configFilePath=~/.oci/config
+gg.eventhandler.oci.profile=DEFAULT
+gg.eventhandler.oci.namespace=orasenatdpltintegration02
+gg.eventhandler.oci.region=us-ashburn-1
+gg.eventhandler.oci.compartmentID=ocid1.compartment.oc1..aaaaaaaanunsv7u5me5gn3mcq6xlyknaebaj7uxaf42rzpo37xhfrjgqokaq
+gg.eventhandler.oci.pathMappingTemplate=${schemaName}
+gg.eventhandler.oci.bucketMappingTemplate=GG4BD
+gg.eventhandler.oci.fileNameMappingTemplate=${tableName}_${currentTimestamp}.parquet
+gg.eventhandler.oci.finalizeAction=NONE
+
+goldengate.userexit.timestamp=utc
+goldengate.userexit.writers=javawriter
+javawriter.stats.display=TRUE
+javawriter.stats.full=TRUE
+
+gg.log=log4j
+gg.log.level=INFO
+gg.includeggtokens=true
+gg.report.time=30sec
+
+#Set the classpath here
+#User TODO - Need the AWS Java SDK, Parquet Dependencies, HDFS Client Dependencies
+gg.classpath=/u01/app/jars/oci_libs/oci/lib/*:/u01/app/jars/oci_libs/oci/third-party/lib/*:/u01/app/jars/parquet_libs/*
+
+javawriter.bootoptions=-Xmx512m -Xms32m -Djava.class.path=.:ggjava/ggjava.jar:./dirprm
+```
+4. Now you can goto ggsci command prompt and start the replicat RFWPRQ.
+
+![](images/500/image100_4.png)
+
+5. You will be able to see the files created in OCI object storage.
+
+![](images/500/image100_5.png)
