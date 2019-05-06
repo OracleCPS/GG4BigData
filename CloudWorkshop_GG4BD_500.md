@@ -91,7 +91,6 @@ drwxr-xr-x. 4 oracle oracle      4096 Apr 15 21:20 addons
 -rwxr-xr-x. 1 oracle oracle 115685847 May  6 10:12 oci-java-sdk.zip
 ```
 
-
 ### STEP 2: Goldengate Replicat Setup for delimitedtext format in OCI Obejct Storage.
 
 1. We already have a trail file created in the GGBD home. We will be using the same trail file to replicate to OCI Object Storage.
