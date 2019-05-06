@@ -88,33 +88,33 @@ Now untar the file in the location.
 2. Add the replicat with the below commands.
 
 ```
-GGSCI (gg4bd-target01) 4> add replicat RFWDSV, exttrail ./dirdat/eb
+GGSCI (gg4bd-target01) 4> add replicat rfwcsv, exttrail ./dirdat/eb
 REPLICAT added.
 
-GGSCI (gg4bd-target01) 5> edit param RFWDSV
+GGSCI (gg4bd-target01) 5> edit param rfwcsv
 ```
 
 Add the below parameters in the parameter file :
 ```
-REPLICAT RFWDSV
+REPLICAT RFWCSV
 -----------------------------------------------------------------------------------------
 -- Trail file for this example is located in "AdapterExamples/trail" directory
 -- Command to add REPLICAT
--- add replicat RFWDSV, exttrail ./dirdat/eb
+-- add replicat RFWCSV, exttrail ./dirdat/eb
 -- SETENV(GGS_JAVAUSEREXIT_CONF = 'dirprm/fw.props')
 -----------------------------------------------------------------------------------------
-TARGETDB LIBFILE libggjava.so SET property=dirprm/rfwdsv.props
+TARGETDB LIBFILE libggjava.so SET property=dirprm/rfwcsv.props
 REPORTCOUNT EVERY 1 MINUTES, RATE
 GROUPTRANSOPS 1000
 MAP employees.*, TARGET employees.*;
 ```
 
-3. Now edit the dirprm/rfwdsv.props file with the below parameters. You can use sample property files found in $GGBD_HOME/AdapterExamples/big-data/filewriter .
+3. Now edit the dirprm/rfwcsv.props file with the below parameters. You can use sample property files found in $GGBD_HOME/AdapterExamples/big-data/filewriter .
 
 ```
 GGSCI (gg4bd-target01) 8> exit
 [oracle@gg4bd-target01 ggbd_home1]$ cd dirprm
-[oracle@gg4bd-target01 dirprm]$ vi rfwdsv.props
+[oracle@gg4bd-target01 dirprm]$ vi rfwcsv.props
 ```
 
 Below are the parametrs we will be using.
@@ -136,6 +136,7 @@ gg.handler.filewriter.format.pkUpdateHandling=update
 gg.handler.filewriter.partitionByTable=true
 gg.handler.filewriter.includetokens=true
 gg.handler.filewriter.partitionByTable=true
+
 #Selecting the Parquet Event Handler
 gg.handler.filewriter.eventHandler=oci
 gg.handler.filewriter.rollOnShutdown=true
@@ -168,7 +169,7 @@ gg.classpath=/u01/app/jars/oci_libs/oci/lib/*:/u01/app/jars/oci_libs/oci/third-p
 javawriter.bootoptions=-Xmx512m -Xms32m -Djava.class.path=.:ggjava/ggjava.jar:./dirprm
 ```
 
-4. Now goto ggsci prompt and you will see the replicat RFWDSV. start the replicat and see the data in the OCI object storage.
+4. Now goto ggsci prompt and you will see the replicat rfwcsv. start the replicat and see the data in the OCI object storage.
 
 ![](images/500/image100_2.png)
 
@@ -253,6 +254,7 @@ gg.handler.filewriter.format=avro_row_ocf
 gg.handler.filewriter.format.pkUpdateHandling=update
 gg.handler.filewriter.includetokens=true
 gg.handler.filewriter.partitionByTable=true
+
 #Selecting the Parquet Event Handler
 gg.handler.filewriter.eventHandler=parquet
 gg.handler.filewriter.rollOnShutdown=true
@@ -262,7 +264,8 @@ gg.eventhandler.parquet.type=parquet
 gg.eventhandler.parquet.pathMappingTemplate=./dirparquet
 gg.eventhandler.parquet.writeToHDFS=false
 gg.eventhandler.parquet.finalizeAction=delete
-#Selecting the S3 Event Handler
+
+#Selecting the OCI Event Handler
 gg.eventhandler.parquet.eventHandler=oci
 gg.eventhandler.parquet.fileNameMappingTemplate=${tableName}_${currentTimestamp}.parquet
 
