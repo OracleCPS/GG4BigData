@@ -1,5 +1,5 @@
 # Lab 500 -  MySQL to File Writer Handler (csv / parquet format)
-![](images/100/image100_0.png)
+![](images/500/image100_0.png)
 
 
 ## Before You Begin
