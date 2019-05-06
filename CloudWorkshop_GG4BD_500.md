@@ -116,7 +116,6 @@ REPLICAT RFWDSV
 -- add replicat RFWDSV, exttrail ./dirdat/eb
 -- SETENV(GGS_JAVAUSEREXIT_CONF = 'dirprm/fw.props')
 -----------------------------------------------------------------------------------------
-CHECKPARAMS
 TARGETDB LIBFILE libggjava.so SET property=dirprm/rfwdsv.props
 REPORTCOUNT EVERY 1 MINUTES, RATE
 GROUPTRANSOPS 1000
@@ -132,3 +131,55 @@ GGSCI (gg4bd-target01) 8> exit
 ```
 
 Below are the parametrs we will be using.
+
+```
+gg.handlerlist=filewriter
+
+#The File Writer Handler
+gg.handler.filewriter.type=filewriter
+gg.handler.filewriter.mode=op
+gg.handler.filewriter.pathMappingTemplate=./dirout
+gg.handler.filewriter.stateFileDirectory=./dirsta
+gg.handler.filewriter.fileNameMappingTemplate=${fullyQualifiedTableName}_${currentTimestamp}.txt
+gg.handler.filewriter.fileRollInterval=7m
+gg.handler.filewriter.finalizeAction=delete
+gg.handler.filewriter.inactivityRollInterval=7m
+gg.handler.filewriter.format=delimitedtext
+gg.handler.filewriter.format.pkUpdateHandling=update
+gg.handler.filewriter.partitionByTable=true
+gg.handler.filewriter.includetokens=true
+gg.handler.filewriter.partitionByTable=true
+#Selecting the Parquet Event Handler
+gg.handler.filewriter.eventHandler=oci
+gg.handler.filewriter.rollOnShutdown=true
+
+#The OCI Event handler
+gg.eventhandler.oci.type=oci
+gg.eventhandler.oci.configFilePath=~/.oci/config
+gg.eventhandler.oci.profile=DEFAULT
+gg.eventhandler.oci.namespace=orasenatdpltintegration02
+gg.eventhandler.oci.region=us-ashburn-1
+gg.eventhandler.oci.compartmentID=ocid1.compartment.oc1..aaaaaaaanunsv7u5me5gn3mcq6xlyknaebaj7uxaf42rzpo37xhfrjgqokaq
+gg.eventhandler.oci.pathMappingTemplate=${fullyQualifiedTableName}
+gg.eventhandler.oci.bucketMappingTemplate=GG4BD
+gg.eventhandler.oci.fileNameMappingTemplate=${fullyQualifiedTableName}_${currentTimestamp}.csv
+gg.eventhandler.oci.finalizeAction=NONE
+
+goldengate.userexit.timestamp=utc
+goldengate.userexit.writers=javawriter
+javawriter.stats.display=TRUE
+javawriter.stats.full=TRUE
+
+gg.log=log4j
+gg.log.level=INFO
+gg.includeggtokens=true
+gg.report.time=30sec
+
+#Set the classpath here
+#User TODO - Need the AWS Java SDK, Parquet Dependencies, HDFS Client Dependencies
+gg.classpath=/u01/app/jars/oci_libs/lib/*:/u01/app/jars/oci_libs/third-party/lib/*
+javawriter.bootoptions=-Xmx512m -Xms32m -Djava.class.path=.:ggjava/ggjava.jar:./dirprm
+```
+
+4. Now goto ggsci prompt and you will see the replicat RFWDSV. start the replicat and see the data in the OCI object storage.
+
