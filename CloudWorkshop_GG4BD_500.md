@@ -19,7 +19,7 @@ Your will need:
 - Oracle Cloud Object Storage Connection Detals and Library files.
 - for parquet format , need parquet libraries
 
-### STEP 1: Setting up the environment for connection to OCI cloud.
+### STEP 1: Setting up the Environment For Connection to OCI Cloud.
     
 In this step we will set up the compute instace to be able to connect to OCI cloud. We need to Download the OCI libraries and keep it in a directory. 
 
