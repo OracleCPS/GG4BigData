@@ -301,3 +301,5 @@ javawriter.bootoptions=-Xmx512m -Xms32m -Djava.class.path=.:ggjava/ggjava.jar:./
 5. You will be able to see the files created in OCI object storage.
 
 ![](images/500/image100_5.png)
+
+You have completed lab 500! Great Job!
