@@ -4,19 +4,18 @@
 ## Before You Begin
 
 ### Introduction
-In this lab we will use goldengate for bigdata file writer handler to replicate data into OCI cloud in delimitedtext and parquet format.
+In this lab we will use goldengate for bigdata Java Database Connectivity (JDBC) Handler, which can replicate source transactional data to a target or database.The Generic Java Database Connectivity (JDBC) Handler lets you replicate source transactional data to a target system or database by using a JDBC interface. You can use it with targets that support JDBC connectivity.
 
 ### Objectives
-- Goldengate BigData replication to OCI Object Storage in dsv and parquet format
+- Goldengate BigData Java Database Connectivity (JDBC) Handler to replicate source transactional data to a target or database.
 
 ### Time to Complete
-Approximately 60 minutes
+Approximately 30 minutes
 
 ### What Do You Need?
 Your will need:
 - Goldengate for Bigdata
-- Oracle Cloud Object Storage Connection Detals and Library files.
-- for parquet format , need parquet libraries
+- Oracle JDBC Java Driver.
 
 ### STEP 1: Setting up the Environment For Connection to OCI Cloud.
     
