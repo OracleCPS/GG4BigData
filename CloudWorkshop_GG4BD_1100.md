@@ -4,7 +4,7 @@
 ## Before You Begin
 
 ### Introduction
-Provision Golden Gate for Big Data simplifies your data integration by working with on-premises and cloud data source/targetss and accepting data in any shape or format. This lab will guide you on how to provision an instance of DIPC
+In this lab we will use goldengate for bigdata Java Database Connectivity (JDBC) Handler to replicate source transactional data to a target or database.
 
 ### Objectives
 - Provision Provision Golden Gate for Big Data 

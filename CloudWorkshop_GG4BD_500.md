@@ -10,12 +10,13 @@ In this lab we will use goldengate for bigdata Java Database Connectivity (JDBC)
 - Goldengate BigData Java Database Connectivity (JDBC) Handler to replicate source transactional data to a target or database.
 
 ### Time to Complete
-Approximately 30 minutes
+Approximately 0 minutes
 
 ### What Do You Need?
 Your will need:
 - Goldengate for Bigdata
-- Oracle JDBC Java Driver.
+- Oracle Cloud Object Storage Connection Detals and Library files.
+- for parquet format , need parquet libraries
 
 ### STEP 1: Setting up the Environment For Connection to OCI Cloud.
     
