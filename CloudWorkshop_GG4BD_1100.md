@@ -37,4 +37,29 @@ total 7532
 [oracle@gg4bd-target01 oracle_jdbc]$ tar -xvzf ojdbc8-full.tar.gz
 ```
     
-2. 
+2. Add the replicat with the below commands by logging into ggsci prmopt
+
+```
+GGSCI (gg4bd-target01) 4> add replicat rjdbc, exttrail ./dirdat/eb
+REPLICAT added.
+
+GGSCI (gg4bd-target01) 5> edit param rjdbc
+```
+
+Add the below parameters in the parameter file :
+
+```
+REPLICAT rjdbc
+----------------------------------------------------------------------------------------
+-- Trail file for this example is located in "AdapterExamples/trail" directory
+-- Command to add REPLICAT
+-- add replicat rjdbc, exttrail ./dirdat/eb
+--TARGETDB LIBFILE libggjava.so SET property=dirprm/jdbc_mysql_with_mdp.props
+----------------------------------------------------------------------------------------
+TARGETDB LIBFILE libggjava.so SET property=dirprm/jdbc_oracle_with_mdp.props
+REPORTCOUNT EVERY 1 MINUTES, RATE
+GROUPTRANSOPS 1000
+MAP employees.*, TARGET PDB1.EMPLOYEES..*;
+```
+
+3. Now edit the dirprm/rfwcsv.props file with the below parameters. You can use sample property files found in $GGBD_HOME/AdapterExamples/big-data/filewriter.
