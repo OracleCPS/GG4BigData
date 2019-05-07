@@ -108,7 +108,7 @@ GROUPTRANSOPS 1000
 MAP employees.*, TARGET employees.*;
 ```
 
-3. Now edit the dirprm/rfwcsv.props file with the below parameters. You can use sample property files found in $GGBD_HOME/AdapterExamples/big-data/filewriter .
+3. Now edit the dirprm/rfwcsv.props file with the below parameters. You can use sample property files found in $GGBD_HOME/AdapterExamples/big-data/filewriter.
 
 ```
 GGSCI (gg4bd-target01) 8> exit
