@@ -1,6 +1,5 @@
 # Lab 1100 -  MySQL to Oracle (using jdbc)
-![](images/100/image100_0.png)
-
+![](images/1100/image100_0.png)
 
 ## Before You Begin
 
