@@ -62,4 +62,40 @@ GROUPTRANSOPS 1000
 MAP employees.*, TARGET PDB1.EMPLOYEES..*;
 ```
 
-3. Now edit the dirprm/rfwcsv.props file with the below parameters. You can use sample property files found in $GGBD_HOME/AdapterExamples/big-data/filewriter.
+3. Now edit the dirprm/jdbc_oracle_with_mdp.props file with the below parameters. You can use sample property files found in $GGBD_HOME/AdapterExamples/big-data/jdbc.
+
+```
+GGSCI (gg4bd-target01) 8> exit
+[oracle@gg4bd-target01 ggbd_home1]$ cd dirprm
+[oracle@gg4bd-target01 dirprm]$ vi jdbc_oracle_with_mdp.props
+```
+
+Below are the parametrs we will be using.
+```
+gg.handlerlist=jdbcwriter
+gg.handler.jdbcwriter.type=jdbc
+
+#Handler properties for Oracle database target with JDBC Metadata provider
+gg.handler.jdbcwriter.DriverClass=oracle.jdbc.driver.OracleDriver
+gg.handler.jdbcwriter.connectionURL=jdbc:oracle:thin:@gg4dbd-source01.sub01082138321.dipcvcn.oraclevcn.com:1521:pdb1
+gg.handler.jdbcwriter.userName=C##GGADMIN
+gg.handler.jdbcwriter.password=welcome1
+gg.classpath=/u01/app/jars/oracle_jdbc/ojdbc8-full/ojdbc8.jar
+#JDBC Metadata provider for Oracle target
+gg.mdp.type=jdbc
+gg.mdp.ConnectionUrl=jdbc:oracle:thin:@gg4dbd-source01.sub01082138321.dipcvcn.oraclevcn.com:1521:pdb1
+gg.mdp.DriverClassName=oracle.jdbc.driver.OracleDriver
+gg.mdp.UserName=C##GGADMIN
+gg.mdp.Password=welcome1
+
+
+goldengate.userexit.writers=javawriter
+javawriter.stats.display=TRUE
+javawriter.stats.full=TRUE
+gg.log=log4j
+gg.log.level=INFO
+gg.report.time=30sec
+javawriter.bootoptions=-Xmx512m -Xms32m -Djava.class.path=.:ggjava/ggjava.jar:./dirprm
+```
+
+
