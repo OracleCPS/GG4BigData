@@ -10,7 +10,7 @@ In this lab we will use goldengate for bigdata Java Database Connectivity (JDBC)
 - Goldengate BigData Java Database Connectivity (JDBC) Handler to replicate source transactional data to a target or database.
 
 ### Time to Complete
-Approximately 0 minutes
+Approximately 60 minutes
 
 ### What Do You Need?
 Your will need:
