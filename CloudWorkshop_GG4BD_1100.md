@@ -14,5 +14,8 @@ Approximately 30 minutes
 
 ### What Do You Need?
 Your will need:
-- Oracle Cloud URL
-- Oracle Cloud User and Password
+- Goldengate for Bigdata
+- Oracle JDBC Java Driver
+
+### STEP 1: Setting up the Environment For Connection to OCI Cloud.
+
