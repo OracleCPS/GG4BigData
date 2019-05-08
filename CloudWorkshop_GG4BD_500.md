@@ -83,7 +83,7 @@ Now untar the file in the location.
 
 ![](images/500/image100_1.png)
 
-Please refer to Lab 400 for more information.
+Please refer to Lab 400 for more information
 
 2. Add the replicat with the below commands.
 
