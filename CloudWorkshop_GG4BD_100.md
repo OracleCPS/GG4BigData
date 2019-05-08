@@ -1,4 +1,4 @@
-# Lab 100 -  Installation of Golden Gate for Big Data
+# Lab 100 -  Installation of Golden Gate for BigData
 
 ![](images/100/image100_0.png)
 

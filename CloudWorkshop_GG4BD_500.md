@@ -1,14 +1,13 @@
 # Lab 500 -  MySQL to File Writer Handler (csv / parquet format)
 ![](images/500/image100_0.png)
 
-
 ## Before You Begin
 
 ### Introduction
-In this lab we will use goldengate for bigdata file writer handler to replicate data into OCI cloud in delimitedtext and parquet format.
+In this lab we will use goldengate for bigdata Java Database Connectivity (JDBC) Handler, which can replicate source transactional data to a target or database.The Generic Java Database Connectivity (JDBC) Handler lets you replicate source transactional data to a target system or database by using a JDBC interface. You can use it with targets that support JDBC connectivity.
 
 ### Objectives
-- Goldengate BigData replication to OCI Object Storage in dsv and parquet format
+- Goldengate BigData Java Database Connectivity (JDBC) Handler to replicate source transactional data to a target or database.
 
 ### Time to Complete
 Approximately 60 minutes
@@ -84,6 +83,7 @@ Now untar the file in the location.
 
 ![](images/500/image100_1.png)
 
+Please refer to Lab 400 for more information
 
 2. Add the replicat with the below commands.
 
@@ -109,7 +109,7 @@ GROUPTRANSOPS 1000
 MAP employees.*, TARGET employees.*;
 ```
 
-3. Now edit the dirprm/rfwcsv.props file with the below parameters. You can use sample property files found in $GGBD_HOME/AdapterExamples/big-data/filewriter .
+3. Now edit the dirprm/rfwcsv.props file with the below parameters. You can use sample property files found in $GGBD_HOME/AdapterExamples/big-data/filewriter.
 
 ```
 GGSCI (gg4bd-target01) 8> exit
