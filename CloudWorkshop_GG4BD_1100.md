@@ -19,7 +19,13 @@ Your will need:
 
 ### STEP 1: Setting up the Environment For Connection to OCI Cloud.
 
-1. In this step we will download the oracle jdbc jar and create a directory and unzip the files in that directory.
+1. We already have a trail file created in the GGBD home. We will be using the same trail file to replicate to OCI Object Storage.
+
+![](images/1100/image100_1.png)
+
+Please refer to Lab 400 for more information.
+
+2. In this step we will download the oracle jdbc jar and create a directory and unzip the files in that directory.
 
         We already have the jdbc drive downloaded ojdbc8-full.tar.gz in the location /home/oracle/Downloads 
 ```
@@ -37,7 +43,7 @@ total 7532
 [oracle@gg4bd-target01 oracle_jdbc]$ tar -xvzf ojdbc8-full.tar.gz
 ```
     
-2. Add the replicat with the below commands by logging into ggsci prmopt
+3. Add the replicat with the below commands by logging into ggsci prompt
 
 ```
 GGSCI (gg4bd-target01) 4> add replicat rjdbc, exttrail ./dirdat/eb
@@ -71,7 +77,7 @@ MAP employees.titles,       TARGET EMPLOYEES.TITLES,      KEYCOLS(EMP_NO,TITLE,F
 MAP employees.salaries,     TARGET EMPLOYEES.SALARIES,    KEYCOLS(EMP_NO,FROM_DATE);
 ```
 
-3. Now edit the dirprm/jdbc_oracle_with_mdp.props file with the below parameters. You can use sample property files found in $GGBD_HOME/AdapterExamples/big-data/jdbc.
+4. Now edit the dirprm/jdbc_oracle_with_mdp.props file with the below parameters. You can use sample property files found in $GGBD_HOME/AdapterExamples/big-data/jdbc.
 
 ```
 GGSCI (gg4bd-target01) 8> exit
@@ -107,9 +113,9 @@ gg.report.time=30sec
 javawriter.bootoptions=-Xmx512m -Xms32m -Djava.class.path=.:ggjava/ggjava.jar:./dirprm
 ```
 
-4. Now Goto ggsci command prompt and start the replicat. We can see the stats of the replicat
+5. Now Goto ggsci command prompt and start the replicat. We can see the stats of the replicat
 
-![](images/1100/image100_1.png)
+![](images/1100/image100_2.png)
 
 And we can goto the database and see the record count as well. For that log in to GG4BD_Source01 (129.213.97.81)
 
@@ -133,6 +139,6 @@ select 'titles          table -> '|| count(1) from employees.titles UNION ALL
 select 'salaries        table -> '|| count(1) from employees.salaries;
 ```
 
-![](images/1100/image100_2.png)
+![](images/1100/image100_3.png)
 
 You have completed lab 1100! Great Job!
