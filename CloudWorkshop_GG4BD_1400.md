@@ -159,6 +159,6 @@ javawriter.bootoptions=-Xmx512m -Xms32m -Djava.class.path=.:ggjava/ggjava.jar:./
 ![](images/1400/Lab_1400_2.JPG)
 
 
-You have completed lab 500! Great Job!
+You have completed lab 1400! Great Job!
 
 
