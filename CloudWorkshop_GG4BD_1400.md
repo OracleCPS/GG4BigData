@@ -1,8 +1,6 @@
 # Lab 1400 -  MySQL to Flume
 ![](images/1400/1.png)
 
-![](images/1400/1.png)
-
 ## Before You Begin
 
 ### Introduction
