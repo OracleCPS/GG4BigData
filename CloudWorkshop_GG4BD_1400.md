@@ -150,7 +150,7 @@ gg.classpath=/u01/app/jars/oci_libs/oci/lib/*:/u01/app/jars/oci_libs/oci/third-p
 javawriter.bootoptions=-Xmx512m -Xms32m -Djava.class.path=.:ggjava/ggjava.jar:./dirprm
 ```
 
-4. Now goto ggsci prompt and you will see the replicat rfwcsv. start the replicat and see the data in the Apache Flume.
+4. Now goto ggsci prompt and you will see the replicat rflume. start the replicat and see the data in the Apache Flume.
 
 ![](images/1400/Lab_1400_1.JPG)
 
