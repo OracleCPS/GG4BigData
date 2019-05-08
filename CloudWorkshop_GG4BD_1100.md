@@ -59,7 +59,16 @@ REPLICAT rjdbc
 TARGETDB LIBFILE libggjava.so SET property=dirprm/jdbc_oracle_with_mdp.props
 REPORTCOUNT EVERY 1 MINUTES, RATE
 GROUPTRANSOPS 1000
-MAP employees.*, TARGET PDB1.EMPLOYEES..*;
+
+REPERROR DEFAULT, DISCARD
+DISCARDFILE ./dirrpt/rjdbc.dsc, APPEND
+
+MAP employees.employees,    TARGET EMPLOYEES.EMPLOYEES,   KEYCOLS(EMP_NO);
+MAP employees.departments,  TARGET EMPLOYEES.DEPARTMENTS, KEYCOLS(DEPT_NO);
+MAP employees.dept_manager, TARGET EMPLOYEES.DEPT_MANAGER,KEYCOLS(EMP_NO,DEPT_NO);
+MAP employees.dept_emp,     TARGET EMPLOYEES.DEPT_EMP,    KEYCOLS(EMP_NO,DEPT_NO);
+MAP employees.titles,       TARGET EMPLOYEES.TITLES,      KEYCOLS(EMP_NO,TITLE,FROM_DATE);
+MAP employees.salaries,     TARGET EMPLOYEES.SALARIES,    KEYCOLS(EMP_NO,FROM_DATE);
 ```
 
 3. Now edit the dirprm/jdbc_oracle_with_mdp.props file with the below parameters. You can use sample property files found in $GGBD_HOME/AdapterExamples/big-data/jdbc.
@@ -77,16 +86,16 @@ gg.handler.jdbcwriter.type=jdbc
 
 #Handler properties for Oracle database target with JDBC Metadata provider
 gg.handler.jdbcwriter.DriverClass=oracle.jdbc.driver.OracleDriver
-gg.handler.jdbcwriter.connectionURL=jdbc:oracle:thin:@gg4dbd-source01.sub01082138321.dipcvcn.oraclevcn.com:1521:pdb1
-gg.handler.jdbcwriter.userName=C##GGADMIN
-gg.handler.jdbcwriter.password=welcome1
+gg.handler.jdbcwriter.connectionURL=jdbc:oracle:thin:@129.213.97.81:1521/PDB1
+gg.handler.jdbcwriter.userName=employees
+gg.handler.jdbcwriter.password=employees
 gg.classpath=/u01/app/jars/oracle_jdbc/ojdbc8-full/ojdbc8.jar
 #JDBC Metadata provider for Oracle target
 gg.mdp.type=jdbc
-gg.mdp.ConnectionUrl=jdbc:oracle:thin:@gg4dbd-source01.sub01082138321.dipcvcn.oraclevcn.com:1521:pdb1
+gg.mdp.ConnectionUrl=jdbc:oracle:thin:@129.213.97.81:1521/PDB1
 gg.mdp.DriverClassName=oracle.jdbc.driver.OracleDriver
-gg.mdp.UserName=C##GGADMIN
-gg.mdp.Password=welcome1
+gg.mdp.UserName=employees
+gg.mdp.Password=employees
 
 
 goldengate.userexit.writers=javawriter
@@ -98,4 +107,32 @@ gg.report.time=30sec
 javawriter.bootoptions=-Xmx512m -Xms32m -Djava.class.path=.:ggjava/ggjava.jar:./dirprm
 ```
 
+4. Now Goto ggsci command prompt and start the replicat. We can see the stats of the replicat
 
+![](images/1100/image100_1.png)
+
+And we can goto the database and see the record count as well. For that log in to GG4BD_Source01 (129.213.97.81)
+
+```
+[opc@gg4dbd-source01 ~]$ sudo su - oracle
+Last login: Wed May  8 09:22:55 GMT 2019 on pts/6
+[oracle@gg4dbd-source01 ~]$ . oraenv
+ORACLE_SID = [cdb1] ?
+The Oracle base remains unchanged with value /u01/app/oracle
+[oracle@gg4dbd-source01 ~]$ sqlplus employees/employees@pdb1
+```
+
+Now run the below script to get the tables counts
+
+```
+select 'employees       table -> '|| count(1) as Target from employees.employees UNION ALL
+select 'departments     table -> '|| count(1) from employees.departments UNION ALL
+select 'dept_manager    table -> '|| count(1) from employees.dept_manager UNION ALL
+select 'dept_emp        table -> '|| count(1) from employees.dept_emp UNION ALL
+select 'titles          table -> '|| count(1) from employees.titles UNION ALL
+select 'salaries        table -> '|| count(1) from employees.salaries;
+```
+
+![](images/1100/image100_2.png)
+
+You have completed lab 1100! Great Job!
