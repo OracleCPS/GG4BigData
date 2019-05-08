@@ -1,5 +1,5 @@
 # Lab 1400 -  MySQL to Flume
-![](images/100/image100_0.png)
+![](images/1400/1.JPG)
 
 
 ## Before You Begin
