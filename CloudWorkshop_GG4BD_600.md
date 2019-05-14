@@ -5,10 +5,10 @@
 ## Before You Begin
 
 ### Introduction
-Provision Golden Gate for Big Data simplifies your data integration by working with on-premises and cloud data source/targetss and accepting data in any shape or format. This lab will guide you on how to provision an instance of DIPC
+In this lab, we will see how to replicate data from MySQL to HDFS using GoldenGate for Big Data.
 
 ### Objectives
-- Provision Provision Golden Gate for Big Data 
+- GoldenGate replication from MySQL to HDFS
 
 ### Time to Complete
 Approximately 30 minutes
@@ -16,4 +16,18 @@ Approximately 30 minutes
 ### What Do You Need?
 Your will need:
 - Oracle Cloud URL
-- Oracle Cloud User and Password 
+- Oracle Cloud User and Password
+- Installed GoldenGate for MySQL on the source instance where MySQL is running
+- Installed GoldenGate for Big Data on the target instance where HDFS is installed
+
+## MySQL Source Configuration
+### STEP 1: Log in to your Oracle Cloud console and find the public IP address of the source instance. Open a terminal or a Putty and ssh into that source instance with the following command:
+```
+$ ssh -i <path_to_private_key> opc@<public_IP_address>
+```
+
+
+
+
+
+
