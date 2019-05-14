@@ -231,7 +231,7 @@ Current count: 1000, row: 10101|1998-10-14
 ![](images/800/image800_6.png)
 
 
-5. So see the data use scan command.
+5. To see the data in Hbase tables, use scan command.
 
 ```
 hbase(main):007:0>scan 'employees:salaries'

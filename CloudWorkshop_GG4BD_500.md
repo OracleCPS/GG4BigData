@@ -77,7 +77,7 @@ Now untar the file in the location.
 
 ```
 
-### STEP 2: Goldengate Replicat Setup for delimitedtext format in OCI Obejct Storage.
+### STEP 2: Goldengate Replicat Setup for delimitedtext format in OCI Object Storage.
 
 1. We already have a trail file created in the GGBD home. We will be using the same trail file to replicate to OCI Object Storage.
 
