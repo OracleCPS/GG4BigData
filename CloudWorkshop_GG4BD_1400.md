@@ -49,7 +49,7 @@ export FLUME_HOME=/u01/app/flume
 export PATH=$PATH:$FLUME_HOME/bin
 ```
 
-Apache Flume sucessfully installed
+-Apache Flume sucessfully installed
 ```
 [oracle@gg4bd-target01 Downloads]$ flume-ng version
 Flume 1.9.0
