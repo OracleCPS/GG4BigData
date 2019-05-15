@@ -52,8 +52,73 @@ $ ssh -i <path_to_private_key> opc@<public_IP_address>
 
 
 ## HDFS Target Configuration
-1. Go to GGHOME/AdapterExamples/big-data/hdfs/
-2. You should have 2 files hdfs.props and rhdfs.prm (???)
+1. Go to `/u01/app/ggbd_home1/AdapterExamples/big-data/hdfs`. You should have 2 files `hdfs.props` and `rhdfs.prm`.
+    ```
+    $ cd /u01/app/ggbd_home1/AdapterExamples/big-data/hdfs
+    $ ls -al
+    ```
+
+2. Take back up of these files.
+    ```
+    $ cp hdfs.props hdfs.props_bkp
+    $ cp rhdfs.prm rhdfs.prm_bkp
+    ```
+
+3. Edit `hdfs.props` file
+
+    ```
+    $ vi hdfs.props
+    ```
+    * Enter the following contents:
+    ```
+    javawriter.stats.full=TRUE
+
+    gg.log=log4j
+    gg.log.level=INFO
+
+    gg.report.time=30sec
+
+    #Sample gg.classpath for Apache Hadoop
+    #gg.classpath=/var/lib/hadoop/share/hadoop/common/*:/var/lib/hadoop/share/hadoop/common/lib/*:/var/lib/hadoop/share/hadoop/hdfs/*:/var/lib/hadoop/share/hadoop/hdfs/lib/*:/var/lib/hadoop/etc/hadoop/:
+
+    gg.classpath=ggjava/ggjava.jar:/u01/app/hadoop-2.7.6/etc/hadoop/:/u01/app/hadoop-2.7.6/share/hadoop/common/*:/u01/app/hadoop-2.7.6/share/hadoop/common/lib/*:/u01/app/hadoop-2.7.6/share/hadoop/hdfs/*:/u01/app/hadoop-2.7.6/share/hadoop/hdfs/lib/*:/u01/app/jars/hadoop-hdfs-2.4.0.jar
+    #Sample gg.classpath for CDH
+    #gg.classpath=/opt/cloudera/parcels/CDH/lib/hadoop/client/*:/etc/hadoop/conf
+    #Sample gg.classpath for HDP
+    #gg.classpath=/usr/hdp/current/hadoop-client/client/*:/etc/hadoop/conf
+
+    javawriter.bootoptions=-Xmx512m -Xms32m -Djava.class.path=ggjava/ggjava.jar
+    ```
+
+    * Save and quit.
+4. Edit rhdfs.prm file.
+    ```
+    $ vi rhdfs.prm
+    ```
+
+    * Enter the following contents:
+    ```
+    REPLICAT rhdfs
+    ---------------------------------------------------------------------------------------
+    -- Trail file for this example is located in "AdapterExamples/trail" directory
+    -- Command to add REPLICAT
+    -- add replicat rhdfs, exttrail ./dirdat/eb
+    ---------------------------------------------------------------------------------------
+    TARGETDB LIBFILE libggjava.so SET property=dirprm/hdfs.props
+    REPORTCOUNT EVERY 1 MINUTES, RATE
+    GROUPTRANSOPS 10000
+    MAP employees.*, TARGET employees.*;
+    ```
+
+    * Save and quit.
+
+5. Move these files to `/u01/app/ggbd_home1/dirprm` directory.
+    ```
+    $ mv /u01/app/ggbd_home1/AdapterExamples/big-data/hdfs/* /u01/app/ggbd_home1/dirprm
+    ```
+    
+
+
 
 
 
