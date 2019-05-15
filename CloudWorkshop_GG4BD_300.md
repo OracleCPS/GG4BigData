@@ -19,3 +19,27 @@ Approximately 30 minutes
 Your will need:
 - Oracle Cloud URL
 - Oracle Cloud User and Password
+
+### Section 1 - HIVE
+This section describes basic administration Commands for HIVE. Apache Hive is a data warehouse system for data summarization, analysis and querying of large data systems in open source Hadoop platform. Hive is a data warehousing package/infrastructure built on top of Hadoop.
+
+1. Login to Hive Console:
+
+From the Root Console, give the following command :
+sudo su - hive
+
+It will give you the details about hive-log4j properties location and will get into hive shell. Please refer the screenshot below:
+
+![](images/300/1.JPG)
+
+2. Database Information:
+
+To list out the databases in HIVE warehouse, enter the following command :
+hive> show databases;
+
+To Create a new database, enter the following command :
+hive> Create database test;
+
+![](images/300/2.JPG)
+
+3. 
