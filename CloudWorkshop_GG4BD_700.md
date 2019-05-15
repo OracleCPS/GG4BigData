@@ -87,7 +87,7 @@ GGSCI (gg4dbd-source01) 6> START E_MYSQL
 
 ![](images/700/image700_1.png)
 
-5. Now, create the pump and remote trail.
+5. Now, create the pump and remote trail to send data to remote location.
 
 ```
 GGSCI (gg4dbd-source01) 7> ADD EXTRACT P_MYSQL, EXTTRAILSOURCE ./dirdat/ea
