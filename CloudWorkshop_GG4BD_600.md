@@ -26,6 +26,36 @@ Your will need:
 $ ssh -i <path_to_private_key> opc@<public_IP_address>
 ```
 
+### STEP 2: Check where GoldenGate `mgr` process is running.
+1. Change to `oracle` user
+    ```
+    $ sudo su - oracle
+    ```
+2. Search for the process `mgr`
+    ```
+    $ ps -ef | grep mgr
+    ```
+3. You see that `mgr` is running and GoldenGate for MySQL is installed in the location `/u01/app/oracle/product/18.1.0_GGMySQL`.
+
+    ![](images/600/Lab600-image1.jpg)
+
+4. Change directory to the path we found in the previous step.
+
+    ```
+    $ cd /u01/app/oracle/product/18.1.0_GGMySQL
+    ```
+5. Start GGSCI
+    ```
+    $ ./ggsci
+    ```
+6. Steps to set up Extract on MySQL - **TODO**
+
+
+## HDFS Target Configuration
+1. Go to GGHOME/AdapterExamples/big-data/hdfs/
+2. You should have 2 files hdfs.props and rhdfs.prm (???)
+
+
 
 
 
