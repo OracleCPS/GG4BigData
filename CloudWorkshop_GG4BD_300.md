@@ -6,19 +6,17 @@
 ## Before You Begin
 
 ### Introduction
-Provision Golden Gate for Big Data simplifies your data integration by working with on-premises and cloud data source/targetss and accepting data in any shape or format. This lab will guide you on how to provision an instance of DIPC
-
+Provision Golden Gate for Big Data simplifies your data integration by working with on-premises and cloud data source/targetss and accepting data in any shape or format. This lab will give you basic understanding about various Big data Products.
 
 ### Objectives
-- Provision Provision Golden Gate for Big Data 
+- Overview about different Golden Gate big data Products. 
 
 ### Time to Complete
 Approximately 30 minutes
 
 ### What Do You Need?
 Your will need:
-- Oracle Cloud URL
-- Oracle Cloud User and Password
+- Access to Big Data Enviornment using Putty
 
 ### Section 1 - HIVE
 This section describes basic administration Commands for HIVE. Apache Hive is a data warehouse system for data summarization, analysis and querying of large data systems in open source Hadoop platform. Hive is a data warehousing package/infrastructure built on top of Hadoop.
