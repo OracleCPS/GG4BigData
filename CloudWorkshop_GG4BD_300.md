@@ -23,7 +23,7 @@ Your will need:
 ### Section 1 - HIVE
 This section describes basic administration Commands for HIVE. Apache Hive is a data warehouse system for data summarization, analysis and querying of large data systems in open source Hadoop platform. Hive is a data warehousing package/infrastructure built on top of Hadoop.
 
-###1. Login to Hive Console:
+### 1. Login to Hive Console:
 
 From the Root Console, give the following command :
 sudo su - hive
@@ -32,7 +32,7 @@ It will give you the details about hive-log4j properties location and will get i
 
 ![](images/300/1.JPG)
 
-###2. Database Information:
+### 2. Database Information:
 
 To list out the databases in HIVE warehouse, enter the following command :
 hive> show databases;
@@ -42,7 +42,7 @@ hive> Create database test;
 
 ![](images/300/2.JPG)
 
-###3. Table Creation & Deletion:
+### 3. Table Creation & Deletion:
 
 In order to create a new table in a specific database, you first need to navigate to that database, Use the below commands:
 hive>use test;
@@ -64,7 +64,7 @@ When you executre show tables first time, you will see test1 listed. Once you dr
 
 ![](images/300/5.JPG)
 
-###4. Schemas and Databases:
+### 4. Schemas and Databases:
 
 In hove, Schemas and Databases resolve to the same thing, you can either use Schemas or databases, Use the below commands:
 hive> Show schemas;
@@ -79,7 +79,7 @@ Please refer the below screenshot:
 
 ![](images/300/6.JPG)
 
-###5. Version Details:
+### 5. Version Details:
 
 You can check the details of Hive version with a very simple command. This command has to be executed outside hive shell.
 
