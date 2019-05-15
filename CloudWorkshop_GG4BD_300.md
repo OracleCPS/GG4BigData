@@ -101,7 +101,7 @@ Root] pig
 
 It will list down various classes under Pig. Please refer the screenshot below.
 
-![](images/300/PIG/2.JPG)
+![](images/300/pig_2.JPG)
 
 ### 2. Pig Version:
 
@@ -111,7 +111,7 @@ Root] pig -version
 
 Please refer the screenshot below:
 
-![](images/300/PIG/1.JPG)
+![](images/300/pig_1.JPG)
 
 ### 3. Data Load:
 
@@ -121,7 +121,7 @@ example : emp= load 'user/file1' as (id:int,name:chararray,sal:int,sex:chararry,
 
 You can also list the previously used commands by using History command. Please see below
 
-![](images/300/PIG/3.JPG)
+![](images/300/pig_3.JPG)
 
 In this example, Data from customer.txt and orders.txt is getting loaded into Customers and Orders respectively.
 
@@ -133,7 +133,7 @@ grunt> run sample_script.pig
 
 In this example, sample_script contains a LOAD command which is loading into an available pig relation. Please refer the screenshot below:
 
-![](images/300/PIG/4.JPG)
+![](images/300/pig_4.JPG)
 
 ### 5. Listing files:
 
@@ -143,11 +143,11 @@ grunt>sh ls
 
 In  this example, there are some log files created after runnung sample_script.pig, Please refer the screenshot below:
 
-![](images/300/PIG/5.JPG)
+![](images/300/pig_5.JPG)
 
 Just Use the quit command to come out of the grunt shell.
 
 grunt> guit
 
-![](images/300/PIG/6.JPG)
+![](images/300/pig_6.JPG)
 
