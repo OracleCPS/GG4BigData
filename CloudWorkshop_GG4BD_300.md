@@ -8,6 +8,7 @@
 ### Introduction
 Provision Golden Gate for Big Data simplifies your data integration by working with on-premises and cloud data source/targetss and accepting data in any shape or format. This lab will guide you on how to provision an instance of DIPC
 
+
 ### Objectives
 - Provision Provision Golden Gate for Big Data 
 
