@@ -42,4 +42,48 @@ hive> Create database test;
 
 ![](images/300/2.JPG)
 
-3. 
+3. Table Creation & Deletion:
+
+In order to create a new table in a specific database, you first need to navigate to that database, Use the below commands:
+hive>use test;
+
+hive>create table test1(id INT, Name String) row format delimited fields terminated by ',' stored as textfile;
+
+hive> describe test1;
+
+![](images/300/3.JPG)
+
+In order to drop table, just use the following simple command:
+hive> show tables;
+
+hive> drop table if exists test1;
+
+hive> Show tables;
+
+When you executre show tables first time, you will see test1 listed. Once you drop it and list tables again, it will not be their. Please refer the screenshot below:
+
+![](images/300/5.JPG)
+
+4. Schemas and Databases:
+
+In hove, Schemas and Databases resolve to the same thing, you can either use Schemas or databases, Use the below commands:
+hive> Show schemas;
+
+Now we will drop a database name test
+
+hive> drop database if exists test;
+
+hive> show databases;
+
+Please refer the below screenshot:
+
+![](images/300/6.JPG)
+
+5. Version Details:
+
+You can check the details of Hive version with a very simple command. This command has to be executed outside hive shell.
+
+] hive --version
+This command will give you Hive version as well as subversion, Please refer to below screenshot.
+
+![](images/300/4.JPG)
