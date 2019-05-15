@@ -49,7 +49,7 @@ export FLUME_HOME=/u01/app/flume
 export PATH=$PATH:$FLUME_HOME/bin
 ```
 
-Apache Flume sucessfully installed
+-Apache Flume sucessfully installed
 ```
 [oracle@gg4bd-target01 Downloads]$ flume-ng version
 Flume 1.9.0
@@ -150,7 +150,7 @@ gg.classpath=/u01/app/jars/oci_libs/oci/lib/*:/u01/app/jars/oci_libs/oci/third-p
 javawriter.bootoptions=-Xmx512m -Xms32m -Djava.class.path=.:ggjava/ggjava.jar:./dirprm
 ```
 
-4. Now goto ggsci prompt and you will see the replicat rfwcsv. start the replicat and see the data in the Apache Flume.
+4. Now goto ggsci prompt and you will see the replicat rflume. start the replicat and see the data in the Apache Flume.
 
 ![](images/1400/Lab_1400_1.JPG)
 
@@ -159,6 +159,6 @@ javawriter.bootoptions=-Xmx512m -Xms32m -Djava.class.path=.:ggjava/ggjava.jar:./
 ![](images/1400/Lab_1400_2.JPG)
 
 
-You have completed lab 500! Great Job!
+You have completed lab 1400! Great Job!
 
 
