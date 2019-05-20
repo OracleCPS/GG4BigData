@@ -6,19 +6,17 @@
 ## Before You Begin
 
 ### Introduction
-Provision Golden Gate for Big Data simplifies your data integration by working with on-premises and cloud data source/targetss and accepting data in any shape or format. This lab will guide you on how to provision an instance of DIPC
-
+Provision Golden Gate for Big Data simplifies your data integration by working with on-premises and cloud data source/targetss and accepting data in any shape or format. This lab will give you basic understanding about various Big data Products.
 
 ### Objectives
-- Provision Provision Golden Gate for Big Data 
+- Overview about different Golden Gate big data Products. 
 
 ### Time to Complete
 Approximately 30 minutes
 
 ### What Do You Need?
 Your will need:
-- Oracle Cloud URL
-- Oracle Cloud User and Password
+- Access to Big Data Enviornment using Putty
 
 ### Section 1 - HIVE
 This section describes basic administration Commands for HIVE. Apache Hive is a data warehouse system for data summarization, analysis and querying of large data systems in open source Hadoop platform. Hive is a data warehousing package/infrastructure built on top of Hadoop.
@@ -87,3 +85,67 @@ You can check the details of Hive version with a very simple command. This comma
 This command will give you Hive version as well as subversion, Please refer to below screenshot.
 
 ![](images/300/4.JPG)
+
+
+### SECTION 2 - PIG
+
+Pig is a high level scripting language that is used with Apache Hadoop. Pig enables data workers to write complex data transformations without knowing Java. Apache Pig is a platform for analyzing large data sets that consists of a high-level language for expressing data analysis programs, coupled with infrastructure for evaluating these programs
+
+### 1. Login to Pig Console:
+
+From the Root Console, Just type 'Pig' and you will get into grunt console.
+
+Root] pig
+
+It will list down various classes under Pig. Please refer the screenshot below.
+
+![](images/300/pig_2.JPG)
+
+### 2. Pig Version:
+
+You can see the details of the Version of Pig as you go into the grunt console. It also has a dedicated command to check it
+
+Root] pig -version
+
+Please refer the screenshot below:
+
+![](images/300/pig_1.JPG)
+
+### 3. Data Load:
+
+You can load data from any file to pig relation using the LOAD Command. File can be loaded from hdfs, depending upon the Pig Start up mode.
+
+example : emp= load 'user/file1' as (id:int,name:chararray,sal:int,sex:chararry,dno:int);
+
+You can also list the previously used commands by using History command. Please see below
+
+![](images/300/pig_3.JPG)
+
+In this example, Data from customer.txt and orders.txt is getting loaded into Customers and Orders respectively.
+
+### 4. Script Execution:
+
+You can execute any pig commands by putting them in a .pig file and running the file at Pig shell. Please see the command below:
+
+grunt> run sample_script.pig
+
+In this example, sample_script contains a LOAD command which is loading into an available pig relation. Please refer the screenshot below:
+
+![](images/300/pig_4.JPG)
+
+### 5. Listing files:
+
+You can simply list the available files under a file system in the grunt console, Please see the command below:
+
+grunt>sh ls
+
+In  this example, there are some log files created after runnung sample_script.pig, Please refer the screenshot below:
+
+![](images/300/pig_5.JPG)
+
+Just Use the quit command to come out of the grunt shell.
+
+grunt> guit
+
+![](images/300/pig_6.JPG)
+
