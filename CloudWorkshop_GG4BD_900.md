@@ -3,28 +3,27 @@
 
 
 ## Before You Begin
+- We should have Oracle installed on the source compute instance.
+- We should have Kafka installed on the target compute instance.
+- We require to have golden gate binaries installed for the Oracle database on the source side.
+- We require to have golden gate for Big Data binaries installed on the target side.
+
 
 ### Introduction
 Provision Golden Gate for Kafka to simplify your data integration by working with on-premises and cloud data source/targets and accepting data in any shape or format. This labs will guide through the steps required to start a replication stream between an Oracle database and a Kafka queue.
 
 ### Objectives
-- Oracle Installation on the Source Compute instance
-- Kafka installation on the Target Compute Instance
-- Golden Gate for Oracle Installation on source side
-- Golden Gate for Big Data Installation on target inside
 - Extract from Oracle to generate the Trail Files on Source
 - Dump the trail files from Source to target machine
-- Replicat from trail files on the target machine to Kafka topic.
+- Replicate from trail files on the target machine to Kafka topic.
 
 ### Time to Complete
-Approximately 60 minutes
+Approximately 30 minutes
 
 
 ### What Do You Need?
 You will need:
-- Download the Kafka from one of the mirror https://www.apache.org/dyn/closer.cgi?path=/kafka/2.2.0/kafka_2.12-2.2.0.tgz
-- Download the Zookeeper: https://zookeeper.apache.org/releases.html
-
+- Putty if you are using 
 
 ## Oracle Installation on the Source Compute instance
 
@@ -141,11 +140,11 @@ add rmttrail ./dirdat/oraTrails/or, extract P_Ora
 
 1. We already have a trail file created in the GGBD home. We will be using the same trail file to replicate to OCI Object Storage.
 
-![](images/500/image100_1.png)
+![](images/500/image100_1.pn)
 
 Please refer to Lab 400 for more information.
 
-2. Create the kafka.props file in dirprm folder in gghome.
+2. Create the kafka.props file in dirprm folder in your Golden Gate installation folder.
 ```
 [oracle@gg4bd-target01 ggbd_home1]$ cd dirprm
 [oracle@gg4bd-target01 dirprm]$ vi kafka.props
@@ -226,4 +225,4 @@ bin  config  libs  LICENSE  logs  NOTICE  site-docs
 Replace the topic 'oracle' which the topic name that you created.
 
 5. Go and make the below change in Oracle Database on the Source Machine.
-![](images/500/image100_1.png)
+![](images/500/image100_1.pn)
