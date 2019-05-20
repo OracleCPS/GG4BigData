@@ -131,9 +131,8 @@ Extract and pump is configured for data capture on MySQL.
 
 1. Trail file ac is sent to /tmp/ggbd_home1/dirdat/ in the GGBD home by pump. We will be using the same trail file to replicate to HIVE.
 
-![](images/500/image100_1.png)
+![](images/500/image100_0.5.png)
 
-Please refer to Lab 400 for more information
 
 2. Add the replicat with the below commands.
 
@@ -177,7 +176,7 @@ GGSCI (gg4bd-target01) 8> exit
 [oracle@gg4bd-target01 dirprm]$ vi hive2.props
 ```
 
-Below are the parameters we will be using.
+Below are the parameters we will be using for hive.
 
 ```
 gg.handlerlist=hdfs
@@ -353,5 +352,7 @@ Time taken: 0.062 seconds, Fetched: 16 row(s)
 ```
 
 ![](images/700/image700_8.png)
+
+Similarly, we can check the data in the remaining tables.
 
 You have completed lab 700! Great Job!
