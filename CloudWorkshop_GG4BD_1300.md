@@ -16,15 +16,16 @@ Approximately 60 minutes
 ### What Do You Need?
 Your will need:
 -Oracle Goldengate for Bigdata
--Apache Flume Client and Library files.
+-Mongo DB Binary Files.
 
 
 ### STEP 1: Setting up the Environment For Connection to Apache Flume.
     
 In this step we will set up the compute instace to be able to connect to  Apache Flume.  
 
-1. Untar the Flume packages avaliable at "Download" folder.
+1. Download the Mongo DB binaries using curl command .
 
+![](C:\Users\shrinkul\Documents\Engagements\GG4BD_Wkshp\1.png)
 ```
 [opc@gg4bd-target01 ~]$ sudo su - oracle
 Last login: Mon May  6 09:22:44 GMT 2019 on pts/0
