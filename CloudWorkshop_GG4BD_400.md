@@ -144,7 +144,7 @@ TABLE employees.*;
 
 ```
 
-3. Start the Secondary Extract P_MYSQL.
+5. Start the Secondary Extract P_MYSQL.
 
 ```
 GGSCI (gg4dbd-source01) 3> start P_MYSQL
