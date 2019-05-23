@@ -5,16 +5,17 @@
 ## Before You Begin
 
 ### Introduction
-In this lab we will use goldengate for bigdata  to replicate data of MySQL
+In this lab we will use goldengate for MySQL to capture data from MySQL
 
 ### Objectives
-- Goldengate BigData replication for MySQL
+- Goldengate replication for MySQL to capture CDC from MySQL
 
 ### Time to Complete
 Approximately 60 minutes
 
 ### What Do You Need?
 Your will need:
+
 -Oracle Goldengate for MySQL
 -MySQL database.
 
@@ -23,7 +24,7 @@ Your will need:
     
 In this step we will configuring the environment,which is done by editing ASCII files and running OS utilitiesMySQL.  
 
-1. Edit the MySQL server configuration file,which is exist at /etc/my.cnf. .
+1. Edit the MySQL server configuration file,which is exist at /etc/my.cnf.
 
 ```
 datadir=/var/lib/mysql
@@ -31,12 +32,11 @@ socket=/var/lib/mysql/mysql.sock
 log-error=/var/log/mysqld.log
 pid-file=/var/run/mysqld/mysqld.pid
 default_authentication_plugin=mysql_native_password
-
 ```
 
 ### STEP 2: Goldengate Replicat Setup for base extract and pump for all the labs and .
 
-1. Configuring the Primary Extract  .
+1. Configuring the Primary Extract .
 
 ```
 [oracle@gg4dbd-source01 ~]$ cd /u01/app/oracle/product/18.1.0_GGMySQL
