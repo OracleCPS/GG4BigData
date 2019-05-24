@@ -23,7 +23,7 @@ Approximately 30 minutes
 
 ### What Do You Need?
 You will need:
-- Putty if you are using 
+- Putty if you are using
 
 ## Oracle Installation on the Source Compute instance
 
@@ -49,6 +49,101 @@ where:
 ## Golden Gate for Oracle Installation on source side
 
 ## Golden Gate for Big Data Installation on target inside
+
+## Setup the Oracle Database on Source to extract the trail Files
+
+1. Create economic_entity table to be used for replication.
+For this workshop we are going to use economic_entity table.This zip has the DDL command and sample Insert commands scripts for the economic_entity table.
+Download the OBE_DDL_FILES.zip file containing the sql scripts. ( https://www.oracle.com/webfolder/technetwork/tutorials/obe/fmw/goldengate/12c/OGG12c_Integrated_Replicat/files/OBE_DDL_FILES.zip )
+Create the obe directory in the oracle user's default path (the absolute pathname will be:/home/oracle/obe.) Download the zip file containing the sql scripts for this OBE. Copy the downloaded zip file into the /home/oracle/obe directory
+
+```
+[oracle@gg4dbd-source01 ~]$ mkdir obe
+
+```
+
+Copy the zip file into the obe directory. The downloaded file is by default stored into the /home/oracle/Downloads directory.
+
+```
+[oracle@gg4dbd-source01 ~]$ cp ./Downloads/OBE_DDL_FILES.zip ./obe  
+
+```
+
+
+
+
+
+
+1. Connect to the Oracle Database PDB (pdb1) and use employees schema
+```
+[opc@gg4dbd-source01 ~]$ sudo su - oracle
+Last login: Mon May 20 21:03:54 GMT 2019 on pts/8
+[oracle@gg4dbd-source01 ~]$ sqlplus / as sysdba
+
+SQL*Plus: Release 18.0.0.0.0 - Production on Mon May 20 21:31:33 2019
+Version 18.3.0.0.0
+
+Copyright (c) 1982, 2018, Oracle.  All rights reserved.
+
+
+Connected to:
+Oracle Database 18c Enterprise Edition Release 18.0.0.0.0 - Production
+Version 18.3.0.0.0
+
+SQL> ALTER SESSION SET CONTAINER=pdb1;
+
+Session altered.
+
+SQL> ALTER SESSION SET CURRENT_SCHEMA = employees;
+
+```
+
+2. Create a user and grant DBA privilege
+
+```
+SQL> create user gguser identified by gguser ;
+
+User created.
+
+SQL> grant dba to gguser;
+
+Grant succeeded.
+
+```
+
+3. Add Trandata for the table to be replicated from the GGSCI command line.
+  Go the the installation directory of Goldengate and start the GGSCI Command line using the ./ggsci command and add Trandata for the table to be replicated using the below commands.
+
+```
+[oracle@gg4dbd-source01 gghome]$ ./ggsci
+
+Oracle GoldenGate Command Interpreter for Oracle
+Version 18.1.0.0.0 OGGCORE_18.1.0.0.0_PLATFORMS_180928.0432_FBO
+Linux, x64, 64bit (optimized), Oracle 18c on Sep 29 2018 07:21:38
+Operating system character set identified as UTF-8.
+
+Copyright (C) 1995, 2018, Oracle and/or its affiliates. All rights reserved.
+
+
+GGSCI (gg4dbd-source01) 1> dblogin userid gguser@pdb1 ,password gguser
+Successfully logged into database PDB1.
+
+GGSCI (gg4dbd-source01 as gguser@cdb1/PDB1) 4> add trandata employees.economic_entity
+
+2019-05-15 16:07:19  INFO    OGG-15132  Logging of supplemental redo data enabled for table PDB1.EMPLOYEES.ECONOMIC_ENTITY.
+
+2019-05-15 16:07:19  INFO    OGG-15133  TRANDATA for scheduling columns has been added on table PDB1.EMPLOYEES.ECONOMIC_ENTITY.
+
+2019-05-15 16:07:19  INFO    OGG-15135  TRANDATA for instantiation CSN has been added on table PDB1.EMPLOYEES.ECONOMIC_ENTITY.
+
+2019-05-15 16:07:19  INFO    OGG-10471  ***** Oracle Goldengate support information on table EMPLOYEES.ECONOMIC_ENTITY *****
+Oracle Goldengate support native capture on table EMPLOYEES.ECONOMIC_ENTITY.
+Oracle Goldengate marked following column as key columns on table EMPLOYEES.ECONOMIC_ENTITY: ENTITY_ID.
+
+GGSCI (gg4dbd-source01 as gguser@cdb1/PDB1) 5>
+
+```
+
 
 ## Extract from Oracle to generate the Trail Files on Source
 
