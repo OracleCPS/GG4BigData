@@ -1,5 +1,4 @@
 # Lab 600 -  MySQL to HDFS (json text format)
-![](images/100/image100_0.png)
 
 
 ## Before You Begin
@@ -57,6 +56,7 @@ $ ssh -i <path_to_private_key> opc@<public_IP_address>
     $ cd /u01/app/ggbd_home1/AdapterExamples/big-data/hdfs
     $ ls -al
     ```
+    ![](images/600/Lab600-image2.png)
 
 2. Take back up of these files.
     ```
@@ -91,7 +91,7 @@ $ ssh -i <path_to_private_key> opc@<public_IP_address>
     ```
 
     * Save and quit.
-4. Edit rhdfs.prm file.
+4. Edit `rhdfs.prm` file.
     ```
     $ vi rhdfs.prm
     ```
@@ -116,6 +116,58 @@ $ ssh -i <path_to_private_key> opc@<public_IP_address>
     ```
     $ mv /u01/app/ggbd_home1/AdapterExamples/big-data/hdfs/* /u01/app/ggbd_home1/dirprm
     ```
+
+6. Add and start replicat `rhdfs`.
+    ```
+    [oracle@gg4bd-target01 ggbd_home1]$ cd /u01/app/ggbd_home1
+    [oracle@gg4bd-target01 ggbd_home1]$ ./ggsci
+    GGSCI (gg4bd-target01) 1> add replicat rhdfs, exttrail ./dirdat/eb
+    GGSCI (gg4bd-target01) 2> start rhdfs
+    GGSCI (gg4bd-target01) 3> info all
+    ```
+    ![](images/600/Lab600-image3.png)
+    ![](images/600/Lab600-image4.png)
+
+7. Once the replicat is started and running, everything is ready for replication. To see the statistics of the data being replicated, issue the following command in `./ggsci`:
+
+    ```
+    GGSCI (gg4bd-target01) 4> send rhdfs stats
+
+    Sending STATS request to REPLICAT RHDFS ...
+
+    Start of Statistics at 2019-05-07 15:30:23.
+
+    Replicating from employees.departments to employees.departments:
+
+    *** Total statistics since 2019-05-07 15:30:19 ***
+        Total inserts                                     10.00
+        Total updates                                      1.00
+        Total deletes                                      0.00
+        Total discards                                     0.00
+        Total operations                                  11.00
+
+    *** Daily statistics since 2019-05-07 15:30:19 ***
+        Total inserts                                     10.00
+        Total updates                                      1.00
+        Total deletes                                      0.00
+        Total discards                                     0.00
+        Total operations                                  11.00
+
+    *** Hourly statistics since 2019-05-07 15:30:19 ***
+        Total inserts                                     10.00
+        Total updates                                      1.00
+        Total deletes                                      0.00
+        Total discards                                     0.00
+        Total operations                                  11.00
+
+    *** Latest statistics since 2019-05-07 15:30:19 ***
+        Total inserts                                     10.00
+        Total updates                                      1.00
+        Total deletes                                      0.00
+        Total discards                                     0.00
+        Total operations                                  11.00
+    ```
+Congratulations, you have finished lab 600!
     
 
 
