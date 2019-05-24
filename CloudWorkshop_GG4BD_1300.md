@@ -5,7 +5,7 @@
 ## Before You Begin
 
 ### Introduction
-Provision Golden Gate for Big Data simplifies your data integration by working with on-premises and cloud data source/targetss and accepting data in any shape or format. This lab will guide you on how to provision an instance of DIPC
+Provision Golden Gate for Big Data simplifies your data integration by working with on-premises and cloud data source/targetss and accepting data in any shape or format. This lab will guide you on how to replicate data to mongodb usign Goldengate for Big Data.
 
 ### Objectives
 - Provision Provision Golden Gate for Big Data 
@@ -21,49 +21,30 @@ Your will need:
 
 ### STEP 1: Setting up the Environment For Connection to Apache Flume.
     
-In this step we will set up the compute instace to be able to connect to  Apache Flume.  
+In this step we will Download and set up Mongo DB.  
 
 1. Download the Mongo DB binaries using curl command .
 
-![](C:\Users\shrinkul\Documents\Engagements\GG4BD_Wkshp\1.png)
-```
-[opc@gg4bd-target01 ~]$ sudo su - oracle
-Last login: Mon May  6 09:22:44 GMT 2019 on pts/0
-[oracle@gg4bd-target01 ~]$ cd ~/Downloads/
-[oracle@gg4bd-target01 Downloads]$ tar -xf flume.tar  -C /u01/app
-[oracle@gg4bd-target01 Downloads]$ cd /u01/app
-[oracle@gg4bd-target01 app]$ cd flume/
-[oracle@gg4bd-target01 flume]$ pwd
-/u01/app/flume
-```
+![](images/1300/1.png)
 
-2. Set enviorment variables for Apache Flume.
+2. Untar the downloaded MongoDB Binaries.
 
-```
-export HADOOP_HOME=/home/oracle/Software/hadoop-2.7.6
-export HADOOP_MAPRED_HOME=$HADOOP_HOME
-export HADOOP_COMMON_HOME=$HADOOP_HOME
-export HADOOP_HDFS_HOME=$HADOOP_HOME
-export YARN_HOME=$HADOOP_HOME
-export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
-export PATH=$PATH:$HADOOP_HOME/sbin:$HADOOP_HOME/bin
-export FLUME_HOME=/u01/app/flume
-export PATH=$PATH:$FLUME_HOME/bin
-```
+3. Rename the unzipped mongoDB directory from mongodb-linux-x86_64-3.4.7 to mongodb .
 
--Apache Flume sucessfully installed
-```
-[oracle@gg4bd-target01 Downloads]$ flume-ng version
-Flume 1.9.0
-Source code repository: https://git-wip-us.apache.org/repos/asf/flume.git
-Revision: d4fcab4f501d41597bc616921329a4339f73585e
-Compiled by fszabo on Mon Dec 17 20:45:25 CET 2018
-From source with checksum 35db629a3bda49d23e9b3690c80737f9
-[oracle@gg4bd-target01 Downloads]$
+4. Traverse into the directory renamed in last step and create a sub directory as     data.
 
-```
+![](images/1300/2.png)  
 
-3. Start the flume agent.
+5. Traverse to bin directory under mongodb, and startuup the Mongodb instance.
+
+![](images/1300/3.png)
+
+6. As soon as the MongoDB instance is up and running, it would be Waiting for connections on port 27017 . The default port for mongoDb is 27017.
+
+
+7. Copy the mongodb java driver-3.4.3 to the goldengate installation directory.
+
+![](images/1300/4.png)
 
 ```
 [oracle@gg4bd-target01 ~]$ cd /u01/app/flume/
