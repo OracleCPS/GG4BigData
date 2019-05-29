@@ -1,8 +1,9 @@
+
 # Lab 900 -  Oracle to Kafka (json format) / EventHub
 
 ## Before You Begin
 - We should have Oracle installed on the source compute instance.
-- We should have Kafka installed on the target compute instance.
+- We should have [Quickstart Kafka](https://kafka.apache.org/quickstart) setup on the target compute instance.
 - We require to have golden gate binaries installed for the Oracle database on the source side.
 - We require to have golden gate for Big Data binaries installed on the target side.
 
@@ -21,46 +22,23 @@ Approximately 30 minutes
 
 ### What Do You Need?
 You will need:
-- Putty if you are using
-
-## Oracle Installation on the Source Compute instance
-
-
-## Kafka installation on the Target Compute Instance
-
-This tutorial assumes you are starting fresh and have no existing Kafka or ZooKeeper data.
-
-- Using SCP command transfer the downloaded files to the place you want in Target machine.
-
-![](images/900/image900_1.png)
-
-- Service Name: **{CDB_SOURCE_SERVICE_NAME}**
-
-![](images/1300/image1300_7.JPG)    
-```
-where:
-    {LOCAL_AGENT} - Select the local DIPC agent
-    {SERVICE_NAME} - CDB Service name string for the source database server.
-
-```
-
-## Golden Gate for Oracle Installation on source side
-
-## Golden Gate for Big Data Installation on target inside
+- Putty if you are using windows machine
 
 ## Setup the Oracle Database on Source to extract the trail Files
 
-1. Create economic_entity table to be used for replication.
+##### 1. Create economic_entity table to be used for replication.
 For this workshop we are going to use economic_entity table.This zip has the DDL command and sample Insert commands scripts for the economic_entity table.
-Download the OBE_DDL_FILES.zip file containing the sql scripts. ( https://www.oracle.com/webfolder/technetwork/tutorials/obe/fmw/goldengate/12c/OGG12c_Integrated_Replicat/files/OBE_DDL_FILES.zip )
-Create the obe directory in the oracle user's default path (the absolute pathname will be:/home/oracle/obe.) Download the zip file containing the sql scripts for this OBE. Copy the downloaded zip file into the /home/oracle/obe directory
+Download the [OBE_DDL_FILES.zip]( https://www.oracle.com/webfolder/technetwork/tutorials/obe/fmw/goldengate/12c/OGG12c_Integrated_Replicat/files/OBE_DDL_FILES.zip ) file containing the sql scripts on your source machine.
+Create the obe directory in the oracle user's default path (the absolute pathname will be:/home/oracle/obe) Download the zip file containing the sql scripts for this OBE. Copy the downloaded zip file into the /home/oracle/obe directory
 
 ```
+[opc@gg4dbd-source01 ~]$ sudo su - oracle
+Last login: Tue May 28 21:01:30 GMT 2019 on pts/0
 [oracle@gg4dbd-source01 ~]$ mkdir obe
 
 ```
 
-Copy the zip file into the obe directory. The downloaded file is by default stored into the /home/oracle/Downloads directory.
+##### 2. Copy the zip file into the obe directory. The downloaded file is by default stored into the /home/oracle/Downloads directory.
 
 ```
 [oracle@gg4dbd-source01 ~]$ cp ./Downloads/OBE_DDL_FILES.zip ./obe
@@ -70,7 +48,7 @@ Copy the zip file into the obe directory. The downloaded file is by default stor
 
 
 
-1. Connect to the Oracle Database PDB (pdb1) and use employees schema
+##### 3. Connect to the Oracle Database PDB (pdb1) and use employees schema
   Make sure your default directory is /home/oracle/obe and launch sqlplus
 
 ```
@@ -99,7 +77,7 @@ SQL>
 ![](images/900/2.png)
 
 
-2. Alter session and set the container to pdb1 and current working schema as employees
+##### 4. Alter session and set the container to pdb1 and current working schema as employees
 
 ![](images/900/3.png)
 
@@ -117,7 +95,7 @@ SQL>
 
 ```
 
-2. Execute the create table and economic_entity insert script form the SQL commandline
+##### 5. Execute the create table and economic_entity insert script form the SQL commandline
 
   Run the oracle_table_creation.sql script
 
@@ -165,7 +143,7 @@ SQL>
 
  ```
 
-2. Create a user and grant DBA privilege to that user (gguser in this case)
+##### 6. Create a user and grant DBA privilege to that user (gguser in this case)
 
 ```
 SQL> create user gguser identified by gguser ;
@@ -178,7 +156,7 @@ Grant succeeded.
 
 ```
 
-3. Add Trandata for the table to be replicated from the GGSCI command line.
+##### 7. Add Trandata for the table to be replicated from the GGSCI command line.
   Go the the installation directory of Goldengate and start the GGSCI Command line using the ./ggsci command
 
 
@@ -232,7 +210,7 @@ GGSCI (gg4dbd-source01) 1>
 
 ## Extract from Oracle to generate the Trail Files on Source
 
-1. Go to the directory where your ggsci is there and run it.
+##### 1. Go to the directory where your ggsci is installed and run it.
 
 ```
 [oracle@gg4dbd-source01 ogg123]$ ./ggsci
@@ -247,7 +225,7 @@ Copyright (C) 1995, 2018, Oracle and/or its affiliates. All rights reserved.
 
 GGSCI (gg4dbd-source01) 1>
 ```
-2. Add your extract file.
+##### 2. Add your extract file.
 ```
 GGSCI (gg4dbd-source01) 3> edit params E_ORACLE
 ```
@@ -264,7 +242,7 @@ Table pdb1.employees.economic_entity;
 
 ```
 
-3. Now from the GGSCI commandline register and add the Extract using below commands.
+##### 3. Now from the GGSCI commandline register and add the Extract using below commands.
 
 
 ```
@@ -283,7 +261,7 @@ EXTTRAIL added.
 
 ## Pump the trail files from Source to target machine
 
-1. Go to the directory where your ggsci is there and run it.
+##### 1. Go to the directory where your ggsci is there and run it.
 
 ```
 [oracle@gg4dbd-source01 ogg123]$ ./ggsci
@@ -299,7 +277,7 @@ Copyright (C) 1995, 2018, Oracle and/or its affiliates. All rights reserved.
 
 GGSCI (gg4dbd-source01) 1>
 ```
-2. Create a dump process using the below commands.
+##### 2. Create a dump process using the below commands.
 
 ```
 GGSCI (gg4dbd-source01) 3> edit param P_ORACLE
@@ -317,7 +295,7 @@ rmttrail ./dirdat/oraTrails/tr
 table pdb1.employees.*;
 
 ```
-3. Now add the Pump process using below commands.
+##### 3. Now add the Pump process using below commands.
 
 ```
 
@@ -330,10 +308,10 @@ RMTTRAIL added.
 
 ## Replicat from trail files on the target machine to Kafka topic.
 
-1. Now we will be working on the Target machine.We have a trail file created in the GGBD home in the /dirdat/oraTrails directory with the name tr. We will be using this  trail file to send to a Kafka topic.
+Now we will be working on the Target machine.We have a trail file created in the GGBD home in the /dirdat/oraTrails directory with the name tr. We will be using this  trail file to send to a Kafka topic.
 
 
-2. Create the kafka.props file in dirprm folder in your Golden Gate installation folder in your target machine.
+##### 1. Create the kafka.props file in dirprm folder in your Golden Gate installation folder in your target machine.
 ```
 [oracle@gg4bd-target01 ggbd_home1]$ cd dirprm
 [oracle@gg4bd-target01 dirprm]$ vi kafka.props
@@ -342,7 +320,6 @@ Copy paste the below text in kafka.props.
 
 ```
 ## RKAFKA properties for Kafka Topic apply
-##
 gg.handlerlist=kafkahandler
 gg.handler.kafkahandler.type=kafka
 gg.handler.kafkahandler.KafkaProducerConfigFile=producer.properties
@@ -358,20 +335,16 @@ goldengate.userexit.timestamp=utc
 goldengate.userexit.writers=javawriter
 javawriter.stats.display=TRUE
 javawriter.stats.full=TRUE
-##
 gg.log=log4j
 gg.log.level=INFO
-##
 gg.report.time=30sec
-##
 gg.classpath=dirprm/:/u01/app/kafka/libs/*:/u01/app/kafka/config
-##
 javawriter.bootoptions=-Xmx512m -Xms32m -Djava.class.path=ggjava/ggjava.jar
 gg.handler.kafkahandler.format.pkUpdateHandling=update
 ```
 Save the text using wq!
 
-3. Add the replicat with the below commands.
+##### 2. Add the replicat with the below commands.
 ```
 GGSCI (gg4bd-target01) 1> edit param RKAFKA
 ```
@@ -383,36 +356,43 @@ GROUPTRANSOPS 10000
 MAP pdb1.employees.economic_entity, TARGET oracle.*;
 ```
 
-4. Add the replicat with the below command.
+##### 3. Add the replicat with the below command.
 
 ```
 add replicat RKAFKA, exttrail ./dirdat/oraTrails/tr
 ```
 ## Test if the changes made in Oracle Database are getting reflected in the Kafka Topic.
 
-1. Go to the Kafka Installation folder.
+For this Lab, we are using the Kafka Quickstart to quickly launch Kafka server.More details can be found [here](https://kafka.apache.org/quickstart).
 
+##### 1. Go to the Kafka Installation folder.
 ```
 [oracle@gg4bd-target01 app]$ cd kafka
 [oracle@gg4bd-target01 kafka]$ ls
 bin  config  libs  LICENSE  logs  NOTICE  site-docs
 ```
-2. Start the zookeeper server using the below command.
+##### 2. Start the zookeeper server using the below command.
 
 ```
 [oracle@gg4bd-target01 kafka]$ bin/zookeeper-server-start.sh config/zookeeper.properties
 ```
-3. Open another terminal and go to the same kafka folder and start the kafka server using below command.
+##### 3. Open another terminal and go to the same Kafka folder and start the Kafka server using below command.
 
 ```
 [oracle@gg4bd-target01 kafka]$ bin/kafka-server-start.sh config/server.properties
 ```
-4. Open another terminal again and go to the same kafka folder and start the consumer.
+##### 4. Open another terminal and go to the same Kafka folder and create a Kafka topic named "oracle"  using the below command
+```
+bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic oracle
+```
+##### 4. Open another terminal again and go to the same Kafka folder and start the consumer for topic "oracle".
 ```
 [oracle@gg4bd-target01 kafka]$ bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic oracle --from-beginning
 ```
-Replace the topic 'oracle' which the topic name that you created.
 
-5. View the records being added to the kafka topic.These are the same records inserted into the economic_entity table in the Oracle Database in the previous steps.
+##### 5. View the records being added to the Kafka topic.These are the same records inserted into the economic_entity table in the Oracle Database in the previous steps.
 
 ![](images/900/4.png)
+
+##### 6. Test by inserting more records
+To test more, insert more records into the economic_entity table in the Oracle Database.Make sure that the Zookeeper server,Kafka server and Kafka consumer for topic "oracle" are up and running during this time.You will see the inserted data being added to the oracle topic in the consumer.
