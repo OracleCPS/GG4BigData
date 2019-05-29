@@ -1,5 +1,5 @@
 # Lab 1300 -  MySQL to MongoDB
-![](images/100/image100_0.png)
+![](images/100/image100_0.PNG)
 
 
 ## Before You Begin
@@ -33,58 +33,58 @@ In this step we will Download and set up Mongo DB.
 
 4. Traverse into the directory renamed in last step and create a sub directory as     data.
 
-![](images/1300/2.png)  
+![](images/1300/2.PNG)  
 
 5. Traverse to bin directory under mongodb, and startuup the Mongodb instance.
 
-![](images/1300/3.png)
+![](images/1300/3.PNG)
 
 6. As soon as the MongoDB instance is up and running, it would be Waiting for connections on port 27017 . The default port for mongoDb is 27017.
 
 
 7. Copy the mongodb java driver(mongo-java-driver-3.4.3.jar) to the goldengate installation directory.
 
-![](images/1300/4.png)
+![](images/1300/4.PNG)
 
 8. Once you do that, make sure you have set JAVA_HOME and LD_LIBRARY_PATH and goldengate home directory looks like below with all neessary files:
 
-![](images/1300/5.png)
+![](images/1300/5.PNG)
 
 9. Copy the MongoDb Replicat parameter and properties file from default AdapterExamples directory to dirprm.
 [If you haven't executed "create subdir" command before then do it now by going to goldengate software command Intrepreter- ./ggsci, which would create all the necessary subdirectories of Goldengate]
 
-![](images/1300/6.png)
+![](images/1300/6.PNG)
 
 10. Edit the mongodb Replicat properties file in dirprm subdirectory to include correct gg classpath to mongodb java driver and other required properties.Your mongodb replicat properties file looks like this:
 
-![](images/1300/7.png)
+![](images/1300/7.PNG)
 
 11. Edit the mongodb replicat parameter file in dirprm subdirectory to include correct table/schema name in MAP statement.Here we are replicating table data of tables in employees schema.
 
-![](images/1300/8.png)
+![](images/1300/8.PNG)
 
 
 12. Login into goldengate software command Intrepreter(./ggsci) and add a replicat in order to replicate data from mysql trails into Mongodb.
 
-![](images/1300/9.png)
+![](images/1300/9.PNG)
 
 13. Start the replicat and check the status of the replicat by executing the info command and make sure the Replicat status is running and RBA has moved over 0.
 
-![](images/1300/10.png)
+![](images/1300/10.PNG)
 
 14. Exit from Goldengate command prompt and go to bin subdirectory under Mongodb directory created earlier. Execute ./mongo command to login into mongodb.
 
-![](images/1300/11.png)
+![](images/1300/11.PNG)
 
 You can see it has connected to mongodb://127.0.0.1:27017 and Mongodb version is 3.4.7.
 
 15. To List all the databases in mongoDB console use the command show dbs.As you can see we have a Database named employees in the list. Use the comaand "use <database-name>" to  switch to a particular database.
 
-![](images/1300/12.png)
+![](images/1300/12.PNG)
 
 16. You can view the data that has been replicated by Goldengate replicat using the command- "db.<database-name>.find()". It will list all the records that have been present in the specific database.
 
-![](images/1300/13.png)
+![](images/1300/13.PNG)
 
 
 ### STEP 2: Setting up the Environment For MySQL.
@@ -233,24 +233,24 @@ EXTRACT     RUNNING     P_MYSQL     00:00:00      00:00:02
     
 1. Copy the mongodb java driver(mongo-java-driver-3.4.3.jar) to the goldengate installation directory.
 
-![](images/1300/4.png)
+![](images/1300/4.PNG)
 
 2. Once you do that, make sure you have set JAVA_HOME and LD_LIBRARY_PATH and goldengate home directory looks like below with all neessary files:
 
-![](images/1300/5.png)
+![](images/1300/5.PNG)
 
 3. Copy the MongoDb Replicat parameter and properties file from default AdapterExamples directory to dirprm.
 [If you haven't executed "create subdir" command before then do it now by going to goldengate software command Intrepreter- ./ggsci, which would create all the necessary subdirectories of Goldengate]
 
-![](images/1300/6.png)
+![](images/1300/6.PNG)
 
 3. Edit the mongodb Replicat properties file in dirprm subdirectory to include correct gg classpath to mongodb java driver and other required properties.Your mongodb replicat properties file looks like this:
 
-![](images/1300/7.png)
+![](images/1300/7.PNG)
 
 4. Edit the mongodb replicat parameter file in dirprm subdirectory to include correct table/schema name in MAP statement.Here we are replicating table data of tables in employees schema.
 
-![](images/1300/8.png)
+![](images/1300/8.PNG)
 
 
 
