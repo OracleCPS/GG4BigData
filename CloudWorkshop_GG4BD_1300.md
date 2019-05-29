@@ -25,7 +25,7 @@ In this step we will Download and set up Mongo DB.
 
 1. Download the Mongo DB binaries using curl command .
 
-![](images/1300/1.png)
+![](images/1300/1.PNG)
 
 2. Untar the downloaded MongoDB Binaries.
 
