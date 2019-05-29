@@ -87,103 +87,192 @@ You can see it has connected to mongodb://127.0.0.1:27017 and Mongodb version is
 ![](images/1300/13.png)
 
 
+### STEP 2: Setting up the Environment For MySQL.
+    
+In this step we will configuring the environment,which is done by editing ASCII files and running OS utilitiesMySQL.  
 
-
-
-```
-[oracle@gg4bd-target01 ~]$ cd /u01/app/flume/
-[oracle@gg4bd-target01 flume]$ sh flume_agent.sh &
-[1] 17159
-[oracle@gg4bd-target01 flume]$ 
-```
-
-
-### STEP 2: Goldengate Replicat Setup for delimitedtext format in OCI Obejct Storage.
-
-1. We already have a trail file created in the GGBD home. We will be using the same trail file to replicate to Apache flume .
-
-![](images/500/image100_1.png)
-
-
-2. Add the replicat with the below commands.
+1. Edit the MySQL server configuration file,which is exist at /etc/my.cnf.
 
 ```
-GGSCI (gg4bd-target01) 4> add replicat rflume, exttrail ./dirdat/eb
-REPLICAT added.
+datadir=/var/lib/mysql
+socket=/var/lib/mysql/mysql.sock
+log-error=/var/log/mysqld.log
+pid-file=/var/run/mysqld/mysqld.pid
+default_authentication_plugin=mysql_native_password
+```
 
-GGSCI (gg4bd-target01) 5> edit param rflume
+### STEP 3: Goldengate Replicat Setup for base extract and pump before setting up replicat .
+
+1. Configuring the Primary Extract .
+
+```
+[oracle@gg4dbd-source01 ~]$ cd /u01/app/oracle/product/18.1.0_GGMySQL
+[oracle@gg4dbd-source01 18.1.0_GGMySQL]$ ./ggsci
+
+Oracle GoldenGate Command Interpreter for MySQL
+Version 18.1.0.0.0 OGGCORE_18.1.0.0.0_PLATFORMS_180928.0432
+Linux, x64, 64bit (optimized), MySQL Enterprise on Sep 28 2018 19:34:16
+Operating system character set identified as UTF-8.
+
+Copyright (C) 1995, 2018, Oracle and/or its affiliates. All rights reserved.
+
+
+
+GGSCI (gg4dbd-source01) 1> ADD EXTRACT E_MYSQL, TRANLOG, BEGIN NOW
+EXTRACT added.
+
+GGSCI (gg4dbd-source01) 2> edit param E_MYSQL
 ```
 
 Add the below parameters in the parameter file :
 ```
-REPLICAT rflume
------------------------------------------------------------------------------------------
--- Trail file for this example is located in "AdapterExamples/trail" directory
--- Command to add REPLICAT
--- add replicat rflume, exttrail ./dirdat/eb
--- SETENV(GGS_JAVAUSEREXIT_CONF = 'dirprm/flume.props')
------------------------------------------------------------------------------------------
-TARGETDB LIBFILE libggjava.so SET property=dirprm/flume.props
-REPORTCOUNT EVERY 1 MINUTES, RATE
-GROUPTRANSOPS 1000
-MAP employees.*, TARGET employees.*;
+EXTRACT E_MYSQL
+--------------------------------------------------------------------------
+-- ADD EXTRACT E_MYSQL, TRANLOG, BEGIN NOW
+-- ADD EXTTRAIL ./dirdat/ea, EXTRACT E_MYSQL
+--------------------------------------------------------------------------
+SETENV (MYSQL_HOME='/var/lib/mysql')
+SETENV (MYSQL_UNIX_PORT='/var/lib/mysql/mysql.sock')
+GETENV (MYSQL_HOME)
+GETENV (MYSQL_TCP_PORT)
+GETENV (MYSQL_UNIX_PORT)
+sourcedb employees,userid ggbd,password W3lcome_123#
+reportcount every 60 seconds, rate
+EXTTRAIL ./dirdat/ea
+TRANLOGOPTIONS ALTLOGDEST "/var/lib/mysql/binlog.index"
+--TRANLOGOPTIONS ALTLOGDEST REMOTE
+GETTRUNCATES;
+TABLE employees.employees;
+TABLE employees.departments;
+TABLE employees.dept_manager;
+TABLE employees.dept_emp;
+TABLE employees.titles;
+TABLE employees.salaries;
+
 ```
 
-3. Now edit the dirprm/rfwcsv.props file with the below parameters. You can use sample property files found in $GGBD_HOME/AdapterExamples/big-data/flume.
+3. Start the Primary Extract E_MYSQL.
 
 ```
-GGSCI (gg4bd-target01) 8> exit
-[oracle@gg4bd-target01 ggbd_home1]$ cd dirprm
-[oracle@gg4bd-target01 dirprm]$ vi flume.props
+GGSCI (gg4dbd-source01) 3> start E_MYSQL
+
+Sending START request to MANAGER ...
+EXTRACT E_MYSQL starting
+
+
+GGSCI (gg4dbd-source01) 4> info all
+
+Program     Status      Group       Lag at Chkpt  Time Since Chkpt
+
+MANAGER     RUNNING
+EXTRACT     RUNNING     E_MYSQL     00:00:00      00:00:03
+
 ```
 
-Below are the parametrs we will be using.
+4. Configuring the Secondary Extract (PUMP).
+
+```
+[oracle@gg4dbd-source01 ~]$ cd /u01/app/oracle/product/18.1.0_GGMySQL
+[oracle@gg4dbd-source01 18.1.0_GGMySQL]$ ./ggsci
+
+Oracle GoldenGate Command Interpreter for MySQL
+Version 18.1.0.0.0 OGGCORE_18.1.0.0.0_PLATFORMS_180928.0432
+Linux, x64, 64bit (optimized), MySQL Enterprise on Sep 28 2018 19:34:16
+Operating system character set identified as UTF-8.
+
+Copyright (C) 1995, 2018, Oracle and/or its affiliates. All rights reserved.
+
+
+
+GGSCI (gg4dbd-source01) 1> ADD EXTRACT P_MYSQL, EXTTRAILSOURCE ./dirdat/ea
+EXTRACT added.
+
+
+GGSCI (gg4dbd-source01) 2> ADD RMTTRAIL /tmp/ggbd_home1/dirdat/ac, EXTRACT P_MYSQL
+RMTTRAIL added.
+
+GGSCI (gg4dbd-source01) 2> edit param P_MYSQL
+```
+Add the below parameters in the parameter file :
+```
+EXTRACT P_MYSQL
+--------------------------------------------------------------------------
+-- ADD EXTRACT P_MYSQL, EXTTRAILSOURCE ./dirdat/ea
+-- ADD RMTTRAIL /tmp/ggbd_home1/dirdat/ac, EXTRACT P_MYSQL
+--------------------------------------------------------------------------
+--RMTHOST 132.145.181.107, MGRPORT 7100
+--RMTTRAIL /u01/app/ggbd_home1/dirdat/eb
+RMTHOST 129.213.49.56, MGRPORT 7100
+RMTTRAIL /tmp/ggbd_home1/dirdat/ac
+PASSTHRU
+REPORTCOUNT EVERY 60 SECONDS, RATE
+
+TABLE employees.*;
 
 ```
 
-gg.handlerlist = flumehandler
-gg.handler.flumehandler.type=flume
-gg.handler.flumehandler.RpcClientPropertiesFile=custom-flume-rpc.properties
-gg.handler.flumehandler.format=avro_op
-gg.handler.flumehandler.mode=tx
-#gg.handler.flumehandler.maxGroupSize=100, 1Mb
-#gg.handler.flumehandler.minGroupSize=50, 500 Kb
-gg.handler.flumehandler.EventMapsTo=tx
-gg.handler.flumehandler.PropagateSchema=true
-gg.handler.flumehandler.includeTokens=false
-gg.handler.flumehandler.format.WrapMessageInGenericAvroMessage=true
+5. Start the Secondary Extract P_MYSQL.
 
-goldengate.userexit.writers=javawriter
-javawriter.stats.display=TRUE
-javawriter.stats.full=TRUE
-
-gg.log=log4j
-gg.log.level=INFO
-
-gg.report.time=30sec
-
-#Sample gg.classpath for Apache Flume
-gg.classpath=dirprm/:/u01/app/flume/lib/*:
-#Sample gg.classpath for CDH
-#gg.classpath=/etc/flume-ng/conf:/opt/cloudera/parcels/CDH/lib/flume-ng/lib/*
-#Sample gg.classpath for HDP
-#gg.classpath=/etc/flume/conf:/usr/hdp/current/flume-server/lib/*
-
-javawriter.bootoptions=-Xmx512m -Xms32m -Djava.class.path=ggjava/ggjava.jar
-
-#Set the classpath here
-#User TODO - Need the AWS Java SDK, Parquet Dependencies, HDFS Client Dependencies
-gg.classpath=/u01/app/jars/oci_libs/oci/lib/*:/u01/app/jars/oci_libs/oci/third-party/lib/*
-javawriter.bootoptions=-Xmx512m -Xms32m -Djava.class.path=.:ggjava/ggjava.jar:./dirprm
 ```
+GGSCI (gg4dbd-source01) 3> start P_MYSQL
 
-4. Now goto ggsci prompt and you will see the replicat rflume. start the replicat and see the data in the Apache Flume.
-
-![](images/1400/Lab_1400_1.JPG)
-
-5. You will be able to see the files created in Apache Flume.
-
-![](images/1400/Lab_1400_2.JPG)
+Sending START request to MANAGER ...
+EXTRACT P_MYSQL starting
 
 
-You have completed lab 1400! Great Job!
+GGSCI (gg4dbd-source01) 4> info all
+
+Program     Status      Group       Lag at Chkpt  Time Since Chkpt
+
+MANAGER     RUNNING
+EXTRACT     RUNNING     E_MYSQL     00:00:00      00:00:04
+EXTRACT     RUNNING     P_MYSQL     00:00:00      00:00:02
+
+```
+### STEP 4:Setting up the Environment For Connection to MongoDB.
+    
+In this step we will Download and set up Mongo DB.  
+
+1. Download the Mongo DB binaries using curl command .
+
+![](images/1300/1.png)
+
+2. Untar the downloaded MongoDB Binaries.
+
+3. Rename the unzipped mongoDB directory from mongodb-linux-x86_64-3.4.7 to mongodb .
+
+4. Traverse into the directory renamed in last step and create a sub directory as     data.
+
+![](images/1300/2.png)  
+
+5. Traverse to bin directory under mongodb, and startuup the Mongodb instance.
+
+![](images/1300/3.png)
+
+6. As soon as the MongoDB instance is up and running, it would be Waiting for connections on port 27017 . The default port for mongoDb is 27017.
+
+
+7. Copy the mongodb java driver(mongo-java-driver-3.4.3.jar) to the goldengate installation directory.
+
+![](images/1300/4.png)
+
+8. Once you do that, make sure you have set JAVA_HOME and LD_LIBRARY_PATH and goldengate home directory looks like below with all neessary files:
+
+![](images/1300/5.png)
+
+9. Copy the MongoDb Replicat parameter and properties file from default AdapterExamples directory to dirprm.
+[If you haven't executed "create subdir" command before then do it now by going to goldengate software command Intrepreter- ./ggsci, which would create all the necessary subdirectories of Goldengate]
+
+![](images/1300/6.png)
+
+10. Edit the mongodb Replicat properties file in dirprm subdirectory to include correct gg classpath to mongodb java driver and other required properties.Your mongodb replicat properties file looks like this:
+
+![](images/1300/7.png)
+
+11. Edit the mongodb replicat parameter file in dirprm subdirectory to include correct table/schema name in MAP statement.Here we are replicating table data of tables in employees schema.
+
+![](images/1300/8.png)
+
+
+
+You have completed lab 1300! Great Job!
