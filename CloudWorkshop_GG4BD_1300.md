@@ -19,7 +19,7 @@ Your will need:
 -Mongo DB Binary Files.
 
 
-### STEP 1: Setting up the Environment For Connection to Apache Flume.
+### STEP 1: Setting up the Environment For Connection to MongoDB.
     
 In this step we will Download and set up Mongo DB.  
 
