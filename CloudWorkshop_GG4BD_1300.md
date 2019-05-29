@@ -229,47 +229,26 @@ EXTRACT     RUNNING     E_MYSQL     00:00:00      00:00:04
 EXTRACT     RUNNING     P_MYSQL     00:00:00      00:00:02
 
 ```
-### STEP 4:Setting up the Environment For Connection to MongoDB.
+### STEP 4:Setting up the Goldengate Replicat for Replication to MongoDB.
     
-In this step we will Download and set up Mongo DB.  
-
-1. Download the Mongo DB binaries using curl command .
-
-![](images/1300/1.png)
-
-2. Untar the downloaded MongoDB Binaries.
-
-3. Rename the unzipped mongoDB directory from mongodb-linux-x86_64-3.4.7 to mongodb .
-
-4. Traverse into the directory renamed in last step and create a sub directory as     data.
-
-![](images/1300/2.png)  
-
-5. Traverse to bin directory under mongodb, and startuup the Mongodb instance.
-
-![](images/1300/3.png)
-
-6. As soon as the MongoDB instance is up and running, it would be Waiting for connections on port 27017 . The default port for mongoDb is 27017.
-
-
-7. Copy the mongodb java driver(mongo-java-driver-3.4.3.jar) to the goldengate installation directory.
+1. Copy the mongodb java driver(mongo-java-driver-3.4.3.jar) to the goldengate installation directory.
 
 ![](images/1300/4.png)
 
-8. Once you do that, make sure you have set JAVA_HOME and LD_LIBRARY_PATH and goldengate home directory looks like below with all neessary files:
+2. Once you do that, make sure you have set JAVA_HOME and LD_LIBRARY_PATH and goldengate home directory looks like below with all neessary files:
 
 ![](images/1300/5.png)
 
-9. Copy the MongoDb Replicat parameter and properties file from default AdapterExamples directory to dirprm.
+3. Copy the MongoDb Replicat parameter and properties file from default AdapterExamples directory to dirprm.
 [If you haven't executed "create subdir" command before then do it now by going to goldengate software command Intrepreter- ./ggsci, which would create all the necessary subdirectories of Goldengate]
 
 ![](images/1300/6.png)
 
-10. Edit the mongodb Replicat properties file in dirprm subdirectory to include correct gg classpath to mongodb java driver and other required properties.Your mongodb replicat properties file looks like this:
+3. Edit the mongodb Replicat properties file in dirprm subdirectory to include correct gg classpath to mongodb java driver and other required properties.Your mongodb replicat properties file looks like this:
 
 ![](images/1300/7.png)
 
-11. Edit the mongodb replicat parameter file in dirprm subdirectory to include correct table/schema name in MAP statement.Here we are replicating table data of tables in employees schema.
+4. Edit the mongodb replicat parameter file in dirprm subdirectory to include correct table/schema name in MAP statement.Here we are replicating table data of tables in employees schema.
 
 ![](images/1300/8.png)
 
