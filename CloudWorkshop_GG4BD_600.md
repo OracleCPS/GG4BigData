@@ -62,7 +62,7 @@ pid-file=/var/run/mysqld/mysqld.pid
 default_authentication_plugin=mysql_native_password
 ```
 
-### STEP 4: Goldengate Replicat Setup for base extract and pump for all the labs and .
+### STEP 4: Goldengate Extract Setup for base extract and pump for all the labs and .
 
 1. Configuring the Primary Extract .
 
