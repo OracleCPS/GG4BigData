@@ -202,4 +202,29 @@ x <- c(10.4, 5.6, 3.1, 6.4, 21.7)
 
  ![](images/300/R_4.JPG)
 
- 
+Consider an example of the plot() function. It will display graphically the output, please refer the screenshot below:
+
+d <- outer(0:9, 0:9)
+
+fr <- table(outer(d, d, "-"))
+
+plot(fr, xlab="Determinant", ylab="Frequency")
+
+Plot() uses a histogram like plot method.
+
+ ![](images/300/R_5.JPG)
+
+
+### 3. Files and Directories :
+
+There are many functions to manipulate files and directories. 
+
+* To create an empty file or directory use file.create or dir.create.
+
+* Files can be removed by either file.remove or unlink command.  
+
+* If you want to list the files or directories, you can use list.files or list.dirs. 
+
+Please refer the below screenshot for running these commands on R prompt.
+
+ ![](images/300/R_6.JPG)
