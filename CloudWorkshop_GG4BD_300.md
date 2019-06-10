@@ -87,7 +87,7 @@ This command will give you Hive version as well as subversion, Please refer to b
 ![](images/300/4.JPG)
 
 
-### SECTION 2 - PIG
+### SECTION 2 - PIG 
 
 Pig is a high level scripting language that is used with Apache Hadoop. Pig enables data workers to write complex data transformations without knowing Java. Apache Pig is a platform for analyzing large data sets that consists of a high-level language for expressing data analysis programs, coupled with infrastructure for evaluating these programs
 
@@ -145,7 +145,7 @@ In  this example, there are some log files created after runnung sample_script.p
 
 Just Use the quit command to come out of the grunt shell.
 
-grunt> guit
+grunt> quit
 
 ![](images/300/pig_6.JPG)
 
