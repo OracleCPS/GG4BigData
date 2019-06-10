@@ -149,3 +149,30 @@ grunt> quit
 
 ![](images/300/pig_6.JPG)
 
+### SECTION 3 - R
+
+R is an integrated suite of software facilities for data manipulation, calculation and graphical
+display.  Among other things it has
+• An effective data handling and storage facility,
+• A suite of operators for calculations on arrays, in particular matrices,
+• A large, coherent, integrated collection of intermediate tools for data analysis,
+• Graphical facilities for data analysis and display either directly at the computer or on hard-copy
+• A  well  developed,  simple  and  effective  programming  language  (called  ‘S’)  which  includes conditionals, loops, user defined recursive functions and input and output facilities.  (Indeed
+most of the system supplied functions are themselves written in the S language.
+
+### 1. Using R Interactively
+
+When you use the R program it issues a prompt when it expects input commands.  The default prompt is ‘>’, which on UNIX might be the same as the shell prompt.
+
+Create a separate sub-directory,  say work,  to hold data files on which you will use R.  This will be the working directory whenever you use R.
+
+$ mkdir work
+$ cd work
+
+Start the R program with the command
+$ R
+
+Please refer the screenshot below :
+
+![](images/300/R_1.JPG)
+
