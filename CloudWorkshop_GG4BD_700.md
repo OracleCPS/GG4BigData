@@ -91,7 +91,7 @@ GGSCI (gg4dbd-source01) 6> START E_MYSQL
 
 ```
 GGSCI (gg4dbd-source01) 7> ADD EXTRACT P_MYSQL, EXTTRAILSOURCE ./dirdat/ea
-GGSCI (gg4dbd-source01) 8> ADD RMTTRAIL /u01/app/ggbd_home1/dirdat/eb, EXTRACT P_MYSQL
+GGSCI (gg4dbd-source01) 8> ADD RMTTRAIL /u01/app/ggbd_home1/dirdat/ac, EXTRACT P_MYSQL
 ```
 
 6. Edit the pump parameter file.
@@ -105,11 +105,9 @@ Below is the sample pump parameter file.
 ```
 EXTRACT P_MYSQL
 --------------------------------------------------------------------------
--- ADD EXTRACT P_MYSQL, EXTTRAILSOURCE ./dirdat/ea
+-- ADD EXTRACT P_MYSQL, EXTTRAILSOURCE ./dirdat/ac
 -- ADD RMTTRAIL /tmp/ggbd_home1/dirdat/ac, EXTRACT P_MYSQL
 --------------------------------------------------------------------------
---RMTHOST 132.145.181.107, MGRPORT 7100
---RMTTRAIL /u01/app/ggbd_home1/dirdat/eb
 RMTHOST 129.213.49.56, MGRPORT 7100
 RMTTRAIL /tmp/ggbd_home1/dirdat/ac
 PASSTHRU
@@ -131,65 +129,84 @@ Extract and pump is configured for data capture on MySQL.
 
 ### STEP 2: Goldengate Replicat Setup for Hive.
 
-1. We already have a trail file created in the GGBD home. We will be using the same trail file to replicate to Hbase.
+1. Trail file ac is sent to /tmp/ggbd_home1/dirdat/ in the GGBD home by pump. We will be using the same trail file to replicate to HIVE.
 
-![](images/500/image100_1.png)
+![](images/500/image100_0.5.png)
 
-Please refer to Lab 400 for more information
 
 2. Add the replicat with the below commands.
 
 ```
-GGSCI (gg4bd-target01) 4> ADD REPLICAT RHBASE, EXTTRAIL ./dirdat/eb
+GGSCI (gg4bd-target01) 4> ADD REPLICAT RHIVE, EXTTRAIL ./dirdat/ac
 REPLICAT added.
 
-GGSCI (gg4bd-target01) 5> edit param RHBASE
+GGSCI (gg4bd-target01) 5> edit param RHIVE
 ```
 
 Add the below parameters in the parameter file :
 ```
-REPLICAT rhbase
+REPLICAT rhive
+--------------------------------------------------------------------------------------------
 -- Trail file for this example is located in "AdapterExamples/trail" directory
 -- Command to add REPLICAT
--- add replicat rhbase, exttrail AdapterExamples/trail/tr
-TARGETDB LIBFILE libggjava.so SET property=dirprm/hbase.props
+-- add replicat rhive, exttrail /tmp/ggbd_home1/dirdat/ac
+-- SETENV(GGS_JAVAUSEREXIT_CONF = 'dirprm/fw.props')
+--------------------------------------------------------------------------------------------
+TARGETDB LIBFILE libggjava.so SET property=dirprm/hive2.props
 REPORTCOUNT EVERY 1 MINUTES, RATE
---GROUPTRANSOPS 10000
-MAP employees.*, TARGET employees.*;
+GROUPTRANSOPS 1000
+
+MAP employees.*, TARGET EMPLOYEES.*;
 ```
 
-3. Now edit the dirprm/hbase.props file with the below parameters. You can use sample property files found in $GGBD_HOME/AdapterExamples/big-data/hbase. Make sure that hbase client libraries and configuration path is included in the "gg.classpath".
-hbase libraries and configuration path for our lab are given below.
+3. Now edit the dirprm/hive2.props file with the below parameters. You can use sample property files found in $GGBD_HOME/AdapterExamples/big-data/hdfs. Make sure that hive jdbc URL parameter is defined and, configuration path is included in the "gg.classpath".
+hive url, jdbc driver path and configuration path for our lab are given below.
 
 ```
-Hbase Libraries: /u01/app/jars/hbase_libs/hbase-1.3.4/lib
-Hbase Configuration File Path: /u01/app/jars/hbase_libs/hbase-1.3.4/conf
-gg.classpath=/u01/app/jars/hbase_libs/hbase-1.3.4/lib/*:/u01/app/jars/hbase_libs/hbase-1.3.4/conf
+gg.handler.hdfs.hiveJdbcUrl=jdbc:hive2://129.213.49.56:1080/default;ssl=true;sslTrustStore=/tmp/bdcsce.jks;trustStorePassword=changeit?hive.server2.transport.mode=http;hive.server2.thrift.http.path=hs2service
+
+gg.handler.hdfs.hiveJdbcDriver=org.apache.hive.jdbc.HiveDriver
+gg.handler.hdfs.hiveJdbcUserName=bdcsce_admin
+gg.handler.hdfs.hiveJdbcPassword=Wel_Come#123
 ```
 
 ```
 GGSCI (gg4bd-target01) 8> exit
 [oracle@gg4bd-target01 ggbd_home1]$ cd dirprm
-[oracle@gg4bd-target01 dirprm]$ vi hbase.props
+[oracle@gg4bd-target01 dirprm]$ vi hive2.props
 ```
 
-Below are the parameters we will be using.
+Below are the parameters we will be using for hive.
 
 ```
+gg.handlerlist=hdfs
 
-gg.handlerlist=hbase
+gg.handler.hdfs.type=hdfs
+gg.handler.hdfs.includeTokens=false
+gg.handler.hdfs.maxFileSize=1g
+gg.handler.hdfs.pathMappingTemplate=/apps/hive/warehouse/employees.db/${fullyQualifiedTableName}
+gg.handler.hdfs.fileRollInterval=10s
+gg.handler.hdfs.inactivityRollInterval=0
+gg.handler.hdfs.fileNameMappingTemplate=${fullyQualifiedTableName}_${groupName}_${currentTimestamp}.txt
+gg.handler.hdfs.partitionByTable=true
+gg.handler.hdfs.rollOnMetadataChange=true
+gg.handler.hdfs.authType=none
 
-gg.handler.hbase.type=hbase
-gg.handler.hbase.hBaseColumnFamilyName=cf
-gg.handler.hbase.keyValueDelimiter=CDATA[=]
-gg.handler.hbase.keyValuePairDelimiter=CDATA[,]
-gg.handler.hbase.encoding=UTF-8
-gg.handler.hbase.pkUpdateHandling=update
-gg.handler.hbase.nullValueRepresentation=CDATA[NULL]
-gg.handler.hbase.authType=none
-gg.handler.hbase.includeTokens=false
+gg.handler.hdfs.format=avro_row_ocf
 
-gg.handler.hbase.mode=tx
+gg.handler.hdfs.format.PkUpdateHandling=update
+#gg.handler.hdfs.format.includeOpType=true
+#gg.handler.hdfs.format.includeCurrentTimestamp=true
+#gg.handler.hdfs.format.updateOpKey=U
+#gg.handler.hdfs.format.includeColumnNames=true
+
+gg.handler.hdfs.hiveJdbcUrl=jdbc:hive2://129.213.49.56:1080/default;ssl=true;sslTrustStore=/tmp/bdcsce.jks;trustStorePassword=changeit?hive.server2.transport.mode=http;hive.server2.thrift.http.path=hs2service
+
+gg.handler.hdfs.hiveJdbcDriver=org.apache.hive.jdbc.HiveDriver
+gg.handler.hdfs.hiveJdbcUserName=bdcsce_admin
+gg.handler.hdfs.hiveJdbcPassword=Wel_Come#123
+gg.handler.hdfs.schemaFilePath=/apps/hive/warehouse/schema
+gg.handler.hdfs.mode=tx
 
 goldengate.userexit.writers=javawriter
 javawriter.stats.display=TRUE
@@ -200,34 +217,28 @@ gg.log.level=INFO
 
 gg.report.time=30sec
 
-#Sample gg.classpath for Apache HBase
-gg.classpath=/u01/app/jars/hbase_libs/hbase-1.3.4/lib/*:/u01/app/jars/hbase_libs/hbase-1.3.4/conf
-#gg.classpath=/var/lib/hbase/lib/*:/var/lib/hbase/conf:
-#Sample gg.classpath for CDH
-#gg.classpath=/opt/cloudera/parcels/CDH/lib/hbase/lib/*:/etc/hbase/conf
-#Sample gg.classpath for HDP
-#gg.classpath=/usr/hdp/current/hbase-client/lib/*:/etc/hbase/conf
+gg.classpath=ggjava/ggjava.jar:/usr/hdp/current/hadoop-client/etc/hadoop/:/usr/hdp/current/hadoop-client/hadoop/share/hadoop/common/*:/usr/hdp/current/hadoop-client/hadoop/share/hadoop/common/lib/*:/usr/hdp/current/hadoop-client/hadoop/share/hadoop/hdfs/*:/usr/hdp/current/hadoop-client/hadoop/share/hadoop/hdfs/lib/*:/u01/bdcsce/usr/hdp/2.4.2.0-258/hive/lib/*:/usr/hdp/2.4.2.0-258/hive/lib/*:/usr/hdp/2.4.2.0-258/hive-hcatalog/share/hcatalog/*:/usr/hdp/2.4.2.0-258/hive-hcatalog/share/webhcat/java-client/*
 
 javawriter.bootoptions=-Xmx512m -Xms32m -Djava.class.path=ggjava/ggjava.jar
 ```
 
 
-4. Now goto ggsci prompt and you will see the replicat RHBASE. start the replicat and see the data in the Hbase.
+4. Now goto ggsci prompt and you will see the replicat RHIVE. start the replicat and see the data in the Hive.
 
 ```
 [oracle@gg4bd-target01 ggbd_home1]$ ./ggsci
-GGSCI (gg4bd-target01) 1> start RHBASE
-GGSCI (gg4bd-target01) 1> stats RHBASE
+GGSCI (gg4bd-target01) 1> start RHIVE
+GGSCI (gg4bd-target01) 1> stats RHIVE,latest
 ```
 
 ![](images/700/image700_3.png)
 
-5. You will be able to see the tables created in Hbase.
+5. You will be able to see the tables created in Hive.
 
 
-### STEP 3: Verifying the Data in Remote Hbase
+### STEP 3: Verifying the Data in Hive
 
-1. Logon to the big data compute machine where hbase is installed. In this lab, remote host is "129.213.49.56".  
+1. Open a new session for the bigdata compute (129.213.49.56) and logon to hive  
 
 ![](images/700/image700_4.png)
 
@@ -237,57 +248,111 @@ Authenticating with public key "imported-openssh-key"
 Last login: Tue May 14 11:45:17 2019 from pool-72-83-65-125.washdc.fios.verizon.net
 ```
 
-2. Sudo to hbase user.
+2. Sudo to hive user.
 
 ```
-[opc@gg4bd01-bdcsce-1 ~]$ sudo su - hbase
+[opc@gg4bd01-bdcsce-1 ~]$ sudo su - hive
 Last login: Mon May 13 14:23:20 UTC 2019 on pts/6
 ```
 
-3. Logon to hbase shell and execute list command to see the tables in Hbase.
+3. Logon to hive shell and execute "show databases" command to see the databases in hive.
 
 ```
-[hbase@gg4bd01-bdcsce-1 ~]$ hbase shell
-SLF4J: Class path contains multiple SLF4J bindings.
-SLF4J: Found binding in [jar:file:/u01/bdcsce/usr/hdp/2.4.2.0-258/hadoop/lib/slf4j-log4j12-1.7.10.jar!/org/slf4j/impl/StaticLoggerBinder.class]
-SLF4J: Found binding in [jar:file:/u01/bdcsce/usr/hdp/2.4.2.0-258/zookeeper/lib/slf4j-log4j12-1.6.1.jar!/org/slf4j/impl/StaticLoggerBinder.class]
-SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
-SLF4J: Actual binding is of type [org.slf4j.impl.Log4jLoggerFactory]
-HBase Shell; enter 'help<RETURN>' for list of supported commands.
-Type "exit<RETURN>" to leave the HBase Shell
-Version 1.3.1.2.4.2.0-258, rUnknown, Fri Nov 17 19:27:17 UTC 2017
+[hive@gg4bd01-bdcsce-1 ~]$ hive
+WARNING: Use "yarn jar" to launch YARN applications.
 
-hbase(main):001:0>
+Logging initialized using configuration in file:/etc/hive/2.4.2.0-258/0/hive-log4j.properties
+hive> show databases;
+OK
+default
+employees
+gg_hive
+hr
+Time taken: 1.572 seconds, Fetched: 4 row(s)
+hive>
 ```
 
 ![](images/700/image700_5.png)
 
+You can see that employees database is created in hive.
 
-4. Now, check the count of records in a table using below count command.
+
+4. Now, go to employees database and check the tables in employees database.
 
 ```
-hbase(main):004:0> count 'employees:salaries'
-Current count: 1000, row: 10101|1998-10-14
-1044 row(s) in 0.2120 seconds
-
-=> 1044
+hive> use employees;
+OK
+Time taken: 0.021 seconds
+hive> show tables;
+OK
+departments
+dept_emp
+dept_manager
+employees
+salaries
+titles
+Time taken: 0.039 seconds, Fetched: 6 row(s)
 ```
 
 ![](images/700/image700_6.png)
 
 
-5. To see the data in Hbase tables, use scan command.
+5. To check the records count in the table use below query.
 
 ```
-hbase(main):007:0>scan 'employees:salaries'
-ROW                                      COLUMN+CELL
- 10001|1986-06-26                        column=cf:EMP_NO, timestamp=1557758066142, value=10001
- 10001|1986-06-26                        column=cf:FROM_DATE, timestamp=1557758066142, value=1986-06-26
- 10001|1986-06-26                        column=cf:SALARY, timestamp=1557758066142, value=60117
- 10001|1986-06-26                        column=cf:TO_DATE, timestamp=1557758066142, value=1987-06-26
- 10001|1987-06-26                        column=cf:EMP_NO, timestamp=1557758066142, value=10001
+hive> select count(*) from departments;
+Query ID = hive_20190520132719_8bb02d2b-ec73-4f8f-95d4-e12d10585294
+Total jobs = 1
+Launching Job 1 out of 1
+Tez session was closed. Reopening...
+Session re-established.
+
+
+Status: Running (Executing on YARN cluster with App id application_1557743539749_0088)
+
+--------------------------------------------------------------------------------
+        VERTICES      STATUS  TOTAL  COMPLETED  RUNNING  PENDING  FAILED  KILLED
+--------------------------------------------------------------------------------
+Map 1 ..........   SUCCEEDED      1          1        0        0       0       0
+Reducer 2 ......   SUCCEEDED      1          1        0        0       0       0
+--------------------------------------------------------------------------------
+VERTICES: 02/02  [==========================>>] 100%  ELAPSED TIME: 6.49 s
+--------------------------------------------------------------------------------
+OK
+16
+Time taken: 15.02 seconds, Fetched: 1 row(s)
 ```
 
 ![](images/700/image700_7.png)
+
+You can see that there are 16 records in the departments table.
+
+7. To see the records in departments table use below query.
+
+```
+hive> select op_type,dept_no,dept_name from departments;
+OK
+I       d001                    Marketing
+I       d002                    Finance
+I       d003                    Human Resources
+I       d004                    Production
+I       d005                    Development
+I       d006                    Quality Management
+I       d007                    Sales
+I       d008                    Research
+I       d009                    Customer Service
+I       d010                    Strategic Planning
+U       d004                    Operations
+I       d011                    Technology
+I       d012                    Facilities
+I       d013                    Admin
+I       d014                    Skill Management
+I       d015                    Recruitment
+Time taken: 0.062 seconds, Fetched: 16 row(s)
+```
+
+![](images/700/image700_8.png)
+
+Similarly, we can check the data in the remaining tables.
 
 You have completed lab 700! Great Job!
