@@ -151,14 +151,13 @@ grunt> quit
 
 ### SECTION 3 - R
 
-R is an integrated suite of software facilities for data manipulation, calculation and graphical
-display.  Among other things it has
+R is an integrated suite of software facilities for data manipulation, calculation and graphical display.  Among other things it has :
+
 • An effective data handling and storage facility,
 • A suite of operators for calculations on arrays, in particular matrices,
 • A large, coherent, integrated collection of intermediate tools for data analysis,
 • Graphical facilities for data analysis and display either directly at the computer or on hard-copy
-• A  well  developed,  simple  and  effective  programming  language  (called  ‘S’)  which  includes conditionals, loops, user defined recursive functions and input and output facilities.  (Indeed
-most of the system supplied functions are themselves written in the S language.
+• A  well  developed,  simple  and  effective  programming  language  (called  ‘S’)  which  includes conditionals, loops, user defined recursive functions and input and output facilities.  (Indeed most of the system supplied functions are themselves written in the S language)
 
 ### 1. Using R Interactively
 
