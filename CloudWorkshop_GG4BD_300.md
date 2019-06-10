@@ -170,6 +170,7 @@ When you use the R program it issues a prompt when it expects input commands.  T
 Create a separate sub-directory,  say work,  to hold data files on which you will use R.  This will be the working directory whenever you use R.
 
 $ mkdir work
+
 $ cd work
 
 Start the R program with the command
@@ -179,3 +180,26 @@ Please refer the screenshot below :
 
 ![](images/300/R_1.JPG)
 
+You can use help(solve) which is R's inbuilt help facility similar to man facility of UNIX.  Check the screenshot below on how to run the command.
+
+![](images/300/R_2.JPG)
+
+### 2. Simple manipulations; numbers and vectors
+
+R operates on named data structures. simplest such structure is the numeric vector. Consider the following commands to setup values in various vectors:
+
+x <- c(10.4, 5.6, 3.1, 6.4, 21.7)
+
+ y <- c(x, 0, x)
+
+ v <- 2*x + y + 1
+
+ Check the below screenshot for running these commands in R:
+
+ ![](images/300/R_3.JPG)
+
+ During a R session, objects are created and stored by name. You can use the R command objects() or ls() to list the objects in the current R workspace. Please see the screenshot below :
+
+ ![](images/300/R_4.JPG)
+
+ 
