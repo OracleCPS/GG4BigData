@@ -1,7 +1,7 @@
 {
     "workshop": {
         "title": "GoldenGate For BigData Workshop",
-        "description": "These labs will give you a basic understanding of the Oracle Data Integration Cloud Service and many of the capabilities around administration and database development.  The labs will walk you through creating and accessing a new Database Cloud Service instance.  You will explore some common use cases for moving your data from on-premises to the cloud.  Next, you will use the Oracle Database Cloud Backup Module and RMAN to backup your on-premise data to the Oracle Public Cloud and then recover lost data.  Lastly, you will deploy an APEX application and adjust the firewall rules to support access to the application from the Internet using your browser, smart phone or tablet.",
+        "description": "These labs will give you a basic understanding of Goldengate for Bigdata Handlers.",
         "interactive":"https://launch.oracle.com/?dbcs",
         "versions": [
           {
@@ -82,53 +82,45 @@
             {
                 "number": "900",
                 "filename": "CloudWorkshop_GG4BD_900.md",
-                "title": "Lab 900: ",
-                "description": "lab",
+                "title": "Lab 900 - Oracle to Kafka",
                 "labels": {"version": "Instructor Led"}
             },
             {
                 "number": "1000",
                 "filename": "CloudWorkshop_GG4BD_1000.md",
-                "title": "Lab 1000: ",
+                "title": "Lab 1000 - MySQL to Cassandra",
                 "description": "lab",
                 "labels": {"version": "Instructor Led"}
             },
             {
                 "number": "1100",
                 "filename": "CloudWorkshop_GG4BD_1100.md",
-                "title": "Lab 1100: ",
+                "title": "Lab 1100 - MySQL to Oracle (using jdbc)",
                 "description": "lab",
                 "labels": {"version": "Instructor Led"}
             },
             {
                 "number": "1200",
                 "filename": "CloudWorkshop_GG4BD_1200.md",
-                "title": "Lab 1200: ",
+                "title": "Lab 1200 - MySQL to Oracle NoSQL",
                 "description": "lab",
                 "labels": {"version": "Instructor Led"}
             },
             {
                 "number": "1300",
                 "filename": "CloudWorkshop_GG4BD_1300.md",
-                "title": "Lab 1300: ",
+                "title": "Lab 1300 - MySQL to MongoDB",
                 "description": "lab",
                 "labels": {"version": "Instructor Led"}
             },
             {
                 "number": "1400",
                 "filename": "CloudWorkshop_GG4BD_1400.md",
-                "title": "lab 1400",
+                "title": "Lab 1400 - MySQL to Flume",
                 "description": "lab",
                 "labels": {"version": "Instructor Led"}
             },
-            {
-                "number": "1500",
-                "filename": "CloudWorkshop_GG4BD_1500.md",
-                "title": "Lab 1500",
-                "description": "lab",
-                "labels": {"version": "Instructor Led"}
-            },
-           
+                       
             {
                 "number": "0",
                 "filename": "README.md",
