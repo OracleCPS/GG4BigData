@@ -1,4 +1,4 @@
-# GG4BigData
+# Goldengate for Big Data
 
 
 ## How to Prepare for This Workshop 
