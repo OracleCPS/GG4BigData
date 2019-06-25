@@ -8,7 +8,7 @@
 Provision Golden Gate for Big Data simplifies your data integration by working with on-premises and cloud data source/targetss and accepting data in any shape or format. This lab will guide you on how to replicate data to mongodb usign Goldengate for Big Data.
 
 ### Objectives
-- Provision Provision Golden Gate for Big Data 
+- Replicate from MySQL to MongoDB
 
 ### Time to Complete
 Approximately 60 minutes
