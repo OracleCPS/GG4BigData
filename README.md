@@ -5,7 +5,7 @@
 
 - Once you are viewing the workshop's gitHub page's website, you can see a list of Lab Guides at any time by clicking on the **Menu Icon**
 
-## Oracle Golgengate for Bigdata Workshop
+## Oracle Golgengate for Big Data Workshop
 
 Welcome to the Golden Gate for Big Data Workshop. The content will give you a basic understanding of Golden Gate and Big Data Cloud Service and many of the capabilities related to provisioning, data preparation and internals.  The labs are as follows:
 -  Lab 100 - Provisioning Golden Gate for Big Data
