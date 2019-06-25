@@ -100,13 +100,6 @@
                 "labels": {"version": "Instructor Led"}
             },
             {
-                "number": "1200",
-                "filename": "CloudWorkshop_GG4BD_1200.md",
-                "title": "Lab 1200 - MySQL to Oracle NoSQL",
-                "description": "lab",
-                "labels": {"version": "Instructor Led"}
-            },
-            {
                 "number": "1300",
                 "filename": "CloudWorkshop_GG4BD_1300.md",
                 "title": "Lab 1300 - MySQL to MongoDB",
