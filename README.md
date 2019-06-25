@@ -47,138 +47,100 @@ Welcome to the Golden Gate for Big Data Workshop. The content will give you a ba
 
 ### Objectives
 
--   Provision a Data Integration Cloud Service instance.
+-   Installation of Golden Gate for Big Data 12.3.2.1
 
 ## Lab 200 - Provisioning and accessing BigData
 
 **Documentation**: [CloudWorkshop\_GG4BD\_200.md](CloudWorkshop_GG4BD_200.md)
 
 ### Objectives
-- Review how to create connections
-- Review how to execute a Synchonize Data elevated task
+- Provision Big Data Cloud instance
 
 ## Lab 300 - Using BigData Components (Hadoop, Hive, Pig, Spark, Oracle R)
 
 **Documentation**: [CloudWorkshop\_GG4BD\_300.md](CloudWorkshop\_GG4BD\_300.md)
 
 ### Objectives
--	Review downloading process, installation and configuration of DIPC remote agent
--   Synchronize two On-Premise Databases
-
+-	Overview about different Golden Gate big data Products.
 
 ## Lab 400 - MySQL to MySQL
 
 **Documentation**: [CloudWorkshop\_GG4BD\_400.md](CloudWorkshop\_GG4BD\_400.md)
 
 ### Objectives
--   Review downloading process, installation and configuration of DIPC remote agent
--   Migrate an on-prem database to a database cloud service
-
+-   Goldengate replication for MySQL to capture CDC from MySQL
 
 ## Lab 500 - MySQL to File Writer Handlerta
 
 **Documentation**: [CloudWorkshop\_GG4BD\_500.md](CloudWorkshop\_GG4BD\_500.md)
 
 ### Objectives
--   Prepare data from flat files
--   Transform data elements
--   Administer transformations
-
+-   Goldengate BigData Java Database Connectivity (JDBC) Handler to replicate source transactional data to a target or database.
 
 ## Lab 600 - MySQL to HDFS
 
 **Documentation**: [CloudWorkshop\_GG4BD\_600.md](CloudWorkshop\_GG4BD\_600.md)
 
 ### Objectives
--   Undertsand how to import ODI scenarios
--   Execute and monitor ODI scenarios using DIPC
+-   GoldenGate replication from MySQL to HDFS
 
 ## Lab 700 - MySQL to Hive
 
 **Documentation**: [CloudWorkshop\_GG4BD\_700.md](CloudWorkshop\_GG4BD\_700.md)
 
 ### Objectives
-- Demonstrate how to work directly with underneath DIPC GG "engine"
-- Demonstrate how to work directly with underneath DIPC ODI "engine"
-- Demonstrate how to work directly with underneath DIPC EDQ "engine"
-- Understand underlying DIPC architecture
-- Review default Oracle Golden Gate configurations
-- Review weblogic components
-- Revew required ports for communication between agent and DIPC console
+- Replicate source transactional data to Hive using Oracle Goldengate for Bigdata.
 
 ## Lab 800 - MySQL to Hbase
 
 **Documentation**: [CloudWorkshop\_GG4BD\_800.md](CloudWorkshop\_GG4BD\_800.md)
 
 ### Objectives
--   Review how to create connections to Oracle Object Storage
--   Review how to execute a Data Lake Builder task
+-   Replicate source transactional data to Hbase database using Oracle Goldengate for Bigdata
 
 ## Lab 900 - Oracle to Kafka
 
 **Documentation**: [CloudWorkshop\_GG4BD\_900.md](CloudWorkshop\_GG4BD\_900.md)
 
 ### Objectives
--   Review how to create connections
--   Review how to execute a Replicate Data elevated task for Autonomous Data Warehouse
+-   Extract from Oracle to generate the Trail Files on Source
+-   Dump the trail files from Source to target machine
+-   Replicate from trail files on the target machine to Kafka topic.
+
 
 ## Lab 1000 - MySQL to Cassandra
 
 **Documentation**: [CloudWorkshop\_GG4BD\_1000.md](CloudWorkshop\_GG4BD\_1000.md)
 
 ### Objectives
--   Review EDQ Capabilities
--   Connect to sample data, understand how to profile the data and know how to correct the data in EDQ
+-   Goldengate replication for Cassandra to capture CDC from MySQL
 
 ## Lab 1100 - MySQL to Oracle (using jdbc)
 
 **Documentation**: [CloudWorkshop\_GG4BD\_1100.md](CloudWorkshop\_GG4BD\_1100.md)
 
 ### Objectives
--   Review how to create connections
--   Review how to execute a Replicate Data Task between Oracle and Kafka
+-   Replicate from MySQL to Oracle using jdbc
 
 ## Lab 1200 - MySQL to Oracle NoSQL
 
 **Documentation**: [CloudWorkshop\_GG4BD\_1200.md](CloudWorkshop\_GG4BD\_1200.md)
 
 ### Objectives
-- Demonstrate how to work directly with underneath DIPC GG "engine"
-- Demonstrate how to work directly with underneath DIPC ODI "engine"
-- Demonstrate how to work directly with underneath DIPC EDQ "engine"
-- Understand underlying DIPC architecture
-- Review default Oracle Golden Gate configurations
-- Review weblogic components
-- Revew required ports for communication between agent and DIPC console
+- Replicate from MySQL to Oracle NoSQL
 
 ## Lab 1300 - MySQL to MongoDB
 
 **Documentation**: [CloudWorkshop\_GG4BD\_1300.md](CloudWorkshop\_GG4BD\_1300.md)
 
 ### Objectives
--   Review how to create connections to Oracle Object Storage
--   Review how to execute a Data Lake Builder task
+-   Replicate from MySQL to MongoDB
 
 ## Lab 1400 - MySQL to Flume
 
 **Documentation**: [CloudWorkshop\_GG4BD\_1400.md](CloudWorkshop\_GG4BD\_1400.md)
 
 ### Objectives
--   Review how to create connections
--   Review how to execute a Replicate Data elevated task for Autonomous Data Warehouse
+-   Goldengate BigData replication to Apache Flume
 
-## Lab 1500 - Elasticsearch
 
-**Documentation**: [CloudWorkshop\_GG4BD\_1500.md](CloudWorkshop\_GG4BD\_1500.md)
-
-### Objectives
--   Review EDQ Capabilities
--   Connect to sample data, understand how to profile the data and know how to correct the data in EDQ
-
-## Lab 1600 - Oracle Stream Analytics
-
-**Documentation**: [CloudWorkshop\_GG4BD\_1600.md](CloudWorkshop\_GG4BD\_1600.md)
-
-### Objectives
--   Review how to create connections
--   Review how to execute a Replicate Data Task between Oracle and Kafka
