@@ -7,7 +7,7 @@
 In this lab we will use goldengate for bigdata Java Database Connectivity (JDBC) Handler to replicate source transactional data to a target or database.
 
 ### Objectives
-- Provision Provision Golden Gate for Big Data 
+- Replicate from MySQL to Oracle using jdbc
 
 ### Time to Complete
 Approximately 30 minutes
