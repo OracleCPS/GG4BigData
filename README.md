@@ -19,7 +19,6 @@ Welcome to the Golden Gate for Big Data Workshop. The content will give you a ba
 -  Lab 900 - Oracle to Kafka (json / avro format)/ Eventhub
 -  Lab 1000 - MySQL to Cassandra
 -  Lab 1100 - MySQL to Oracle (using jdbc)
--  Lab 1200 - MySQL to Oracle NoSQL
 -  Lab 1300 - MySQL to MongoDB
 -  Lab 1400 - MySQL to Flume
 
@@ -116,13 +115,6 @@ Welcome to the Golden Gate for Big Data Workshop. The content will give you a ba
 
 ### Objectives
 -   Replicate from MySQL to Oracle using jdbc
-
-## Lab 1200 - MySQL to Oracle NoSQL
-
-**Documentation**: [CloudWorkshop\_GG4BD\_1200.md](CloudWorkshop\_GG4BD\_1200.md)
-
-### Objectives
-- Replicate from MySQL to Oracle NoSQL
 
 ## Lab 1300 - MySQL to MongoDB
 
