@@ -22,11 +22,6 @@ Welcome to the Golden Gate for Big Data Workshop. The content will give you a ba
 -  Lab 1200 - MySQL to Oracle NoSQL
 -  Lab 1300 - MySQL to MongoDB
 -  Lab 1400 - MySQL to Flume
--  Lab 1500 - Elasticsearch
--  Lab 1600 - Oracle Stream Analytics - Retail Lab
-- Appendix A - Install Oracle Binaries 18c
-- Appendix B - Install MySQL
-
 
 
 ## Workshop architecture
