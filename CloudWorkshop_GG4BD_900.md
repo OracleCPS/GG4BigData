@@ -160,8 +160,11 @@ Grant succeeded.
   Go the the installation directory of Goldengate and start the GGSCI Command line using the ./ggsci command
 
 
-```
 
+```
+[oracle@gg4dbd-source01]$ locate ggsci
+/u01/app/gghome/ggsci
+[oracle@gg4dbd-source01]$ cd /u01/app/gghome
 [oracle@gg4dbd-source01 gghome]$ ./ggsci
 
 Oracle GoldenGate Command Interpreter for Oracle
